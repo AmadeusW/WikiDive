@@ -14,7 +14,7 @@ $( document ).ready(function() {
 	.done(function(data) {
 		console.log("done");
 		console.log(data);
-		$( "#articleTitle" ).append( data.parse.displaytitle );
-		$( "#results" ).append( data.parse.text['*'] );
+		$( "#section_0" ).append( data.parse.displaytitle );
+		$( "#content" ).append( data.parse.text['*'] );
 	});  
 });
