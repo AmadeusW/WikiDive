@@ -20,5 +20,8 @@ function loadPageIntoElement(page, element) {
 		console.log(data);
 		$( element + " > .pre-content > h1" ).append( data.parse.displaytitle );
 		$( element + " > .content" ).append( data.parse.text['*'] );
+		$( element ).perfectScrollbar({
+			wheelSpeed: 3
+		});
 	});  
 }
