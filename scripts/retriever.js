@@ -1,7 +1,7 @@
 $( document ).ready(function() {
   console.log("ready");
 	$.ajax({
-	    url : "http://en.wikipedia.org/w/api.php?action=parse&format=json&callback=wikiData&continue=&page=Copenhagen",
+	    url : "http://en.wikipedia.org/w/api.php?action=parse&format=json&callback=?&continue=&page=Copenhagen",
 	    data: {
 	    	format: 'json'
 	    },
@@ -18,10 +18,3 @@ $( document ).ready(function() {
 		$( "#results" ).append( data.parse.text['*'] );
 	});  
 });
-
-wikiData = function(data) {
-	alert("wikiData");
-	console.log("wikiData");
-	console.log(data);
-	$( "#results" ).append( data.parse.text );
-}
