@@ -3,6 +3,7 @@
 	height: 100%;
 	overflow-y: scroll;
 	display: inline-block; /* So that they are positioned side by side */
+	white-space: normal;
 }
 
 .wikibrowser-host {
