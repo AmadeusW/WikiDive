@@ -1,6 +1,7 @@
 $( document ).ready(function() {
   console.log("ready");
   loadPageIntoElement("Copenhagen", "#page1");
+  loadPageIntoElement("Amadeus", "#page2");
 });
 
 function loadPageIntoElement(page, element) {
