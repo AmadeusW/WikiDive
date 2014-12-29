@@ -2,6 +2,7 @@ var pageIndex = 0;
 
 $( document ).ready(function() {
   loadPageIntoElement("JSONP", addPage());
+  loadPageIntoElement("Copenhagen", addPage());
 });
 
 function addPage() {
