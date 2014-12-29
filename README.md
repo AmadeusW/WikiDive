@@ -1,13 +1,17 @@
 WikiBrowser
 ===========
 
-Read Wikipedia articles side by side
+Read Wikipedia articles side by side as logical continuations.
+
 This is a proof of concept prototype.
 
 Roadmap
 ---
   * Search
+  * Breadcrumbs
   * Bookmarks
+  * Removing and reogranizing articles
+  * Support for other languages than English
   * jsfiddle.net - like saving and restoring
   * Fix anchor tags which are the same on multiple articles
 
@@ -22,5 +26,8 @@ Links to external resources open in a new tab.
 Inspiration
 ---
 
-The project is inspired by [Code Connect](http://codeconnect.io/), a developer tool and extension to Microsoft Visual Studio. Code Connect represents .NET code on a function-by-function basis, allowing the developer to see at a glance relationships between functions to understand the code better, faster and easier.
-Similarly, WikiBrowser allows readers to explore articles side by side.
+The project is inspired by [Code Connect](http://codeconnect.io/), a developer tool and extension to Microsoft Visual Studio.
+
+Code Connect represents .NET code on a function-by-function basis, allowing the developer to see at a glance relationships between functions to understand the code better, faster and easier.
+
+Similarly, WikiBrowser allows readers to explore articles side by side, since consecutive articles are often continuations, clarifications or elaborations.
