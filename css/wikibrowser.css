@@ -2,7 +2,7 @@
 	overflow-x: scroll;
 	overflow-y: hidden;
 	position: fixed;
-	top: 50px;
+	top: 41px;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -41,4 +41,40 @@
 	/* Requirements for perfect-scrollbar: */
 	position: relative;
 	overflow: hidden;
+}
+
+.wikibrowser-header {
+	border-bottom: 1px solid #CCC;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	background-color: #eee;
+	color: #300;
+	font-family: Georgia, Times, 'Times New Roman', serif;	
+}
+
+.wikibrowser-header a, .wikibrowser-header a:hover, .wikibrowser-header a:visited {
+	color: #300;
+}
+
+.wikibrowser-header h1 {
+	font-variant: small-caps;
+	font-size: 26px;
+	margin-left: 53px;
+	padding-top: 4px;
+	display: inline-block;
+}
+
+.wikibrowser-header .right-align {
+	display: inline-block;
+	float: right;
+	margin-right: 53px;
+	padding-top: 12px;
+}
+
+.wikibrowser-header .divider {
+	padding-left: 1em;
+	padding-right: 1em;
 }
