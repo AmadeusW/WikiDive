@@ -1,6 +1,8 @@
 WikiBrowser
 ===========
 
+**[Demo](http://amadeusw.github.io/WikiBrowser/)**
+
 Read Wikipedia articles side by side as logical continuations.
 
 This is a proof of concept prototype.
