@@ -41,8 +41,27 @@ function loadPageIntoElement(page, element) {
 		console.log(data);
 		$( "#" + element + " > .pre-content > h1" ).append( data.parse.displaytitle );
 		$( "#" + element + " > .content" ).append( data.parse.text['*'] );
+		$( "#" + element + " > .content a").each(fixHyperlink);
 		$( "#" + element ).perfectScrollbar({
 			wheelSpeed: 3
 		});
 	});  
+}
+
+function fixHyperlink(index, element)
+{
+	var jElement = $(element);
+	var address = jElement.attr('href');
+	if (address.substring(0, 6) === '/wiki/')
+	{
+		jElement.attr('href', "http://en.wikipedia.org" + address);
+		console.log("Fixed " + address);
+
+		// TODO: add onClick
+	}
+	else
+	{
+		jElement.attr('target', "_blank");
+		console.log("Fixed external " + address);
+	}
 }
