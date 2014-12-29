@@ -62,7 +62,7 @@ function fixHyperlink(index, element)
 			return false; // prevent going to href (wikipedia)
 		})
 	}
-	else
+	if (address.substring(0, 1) !== '#')
 	{
 		jElement.attr('target', "_blank");
 		console.log("Fixed external " + address);
