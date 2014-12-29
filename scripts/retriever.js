@@ -22,6 +22,11 @@ function addPage() {
 '			</div>';
 
 	$(".wikibrowser-host").append(tempContainer.innerHtml);
+
+	// Scroll to reveal the new pane
+	var newPageOffset = $("#" + pageId).offset().left;
+	$(".wikibrowser-host").animate({scrollLeft: newPageOffset}, 400);
+
 	return pageId;
 }
 
