@@ -35,6 +35,7 @@ function loadPageIntoElement(page, element) {
 	    	format: 'json'
 	    },
 	    dataType: 'jsonp',
+	    cache: 'true' // defaults to false for jsonp.	    
 	})
 	.done(function(data) {
 		$( "#" + element + " > .pre-content > h1" ).append( data.parse.displaytitle );
