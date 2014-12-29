@@ -56,8 +56,11 @@ function fixHyperlink(index, element)
 	{
 		jElement.attr('href', "http://en.wikipedia.org" + address);
 		console.log("Fixed " + address);
-
-		// TODO: add onClick
+		jElement.on('click', function() {
+			console.log("Loading " + address.substring(6));
+			loadPageIntoElement(address.substring(6), addPage());
+			return false; // prevent going to href (wikipedia)
+		})
 	}
 	else
 	{
