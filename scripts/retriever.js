@@ -1,14 +1,12 @@
 var pageIndex = 0;
 
 $( document ).ready(function() {
-  console.log("ready");
   loadPageIntoElement("Copenhagen", addPage());
   loadPageIntoElement("Amadeus", addPage());
 });
 
 function addPage() {
 	var pageId = "page" + pageIndex++;
-	console.log("Creating element " + pageId);
 
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
@@ -37,13 +35,8 @@ function loadPageIntoElement(page, element) {
 	    	format: 'json'
 	    },
 	    dataType: 'jsonp',
-	    success : function(result){
-	        console.log("success");
-	    }
 	})
 	.done(function(data) {
-		console.log("injecting into " + element);
-		console.log(data);
 		$( "#" + element + " > .pre-content > h1" ).append( data.parse.displaytitle );
 		$( "#" + element + " > .content" ).append( data.parse.text['*'] );
 		$( "#" + element + " > .content a").each(fixHyperlink);
@@ -60,9 +53,7 @@ function fixHyperlink(index, element)
 	if (address.substring(0, 6) === '/wiki/')
 	{
 		jElement.attr('href', "http://en.wikipedia.org" + address);
-		console.log("Fixed " + address);
 		jElement.on('click', function() {
-			console.log("Loading " + address.substring(6));
 			loadPageIntoElement(address.substring(6), addPage());
 			return false; // prevent going to href (wikipedia)
 		})
@@ -70,6 +61,5 @@ function fixHyperlink(index, element)
 	if (address.substring(0, 1) !== '#')
 	{
 		jElement.attr('target', "_blank");
-		console.log("Fixed external " + address);
 	}
 }
