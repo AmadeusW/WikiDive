@@ -3,6 +3,7 @@ var pageIndex = 0;
 $( document ).ready(function() {
   loadPageIntoElement("JSONP", addPage());
   loadPageIntoElement("Copenhagen", addPage());
+  addSearchPage()
 });
 
 function addPage() {
@@ -26,6 +27,37 @@ function addPage() {
 	$(".wikibrowser-host").animate({scrollLeft: newPageOffset}, 400);
 
 	return pageId;
+}
+
+function addSearchPage() {
+	var pageId = "page" + pageIndex++;
+
+	var tempContainer = document.createElement("div");
+	tempContainer.innerHtml = 
+'			<div class="wikibrowser-page-host">' +
+'				<div class="wikibrowser-page ps-container ps-active-y" id="' + pageId + '">'+
+'					<div class="pre-content">'+
+'						<h1 id="section_0"></h1>'+
+'					</div>'+
+'					<div id="content" class="content">'+
+'                        <p><strong>Search</strong><br />'+
+'                        <input type="text" placeholder="Coming soon"></input></p>'+
+'                        <p>Other upcoming features:<br />'+
+'                            <ul>'+
+'                                <li>Close and rearrange articles</li>'+
+'                                <li>Set bookmarks and leave notes</li>'+
+'                                <li>Save, restore and share your layout</li>'+
+'                            </ul>'+
+'                        </p>'+
+'                        <p><strong>How do I use this?</strong><br />'+
+'                        Click on links in Wikipedia articles on the left. They will open new articles side by side!</p>'+
+'                   </div>'+
+'				</div>'+
+'			</div>';
+
+	$(".wikibrowser-host").append(tempContainer.innerHtml);
+
+	return pageId;	
 }
 
 function loadPageIntoElement(page, element) {
