@@ -2,7 +2,6 @@ var pageIndex = 0;
 
 $( document ).ready(function() {
   loadPageIntoElement("Copenhagen", addPage());
-  loadPageIntoElement("Amadeus", addPage());
 });
 
 function addPage() {
