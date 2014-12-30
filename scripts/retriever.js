@@ -4,7 +4,7 @@ $( document ).ready(function() {
   addSearchPage();
 });
 
-function addPage() {
+function addPage(previousPage) {
 	var pageId = "page" + pageIndex++;
 
 	var tempContainer = document.createElement("div");
@@ -18,11 +18,23 @@ function addPage() {
 '				</div>'+
 '			</div>';
 
-	$(".wikibrowser-host").append(tempContainer.innerHtml);
-
+	// Add page to the end of wikibrowser-host's children, or after specified element
+	if (typeof previousPage === 'undefined') {
+		console.log("addPage 1");
+		$(".wikibrowser-host").append(tempContainer.innerHtml);
+	}
+	else {
+		console.log("addPage 2");
+		console.log(previousPage);
+		previousPage.after(tempContainer.innerHtml);
+	}
 	// Scroll to reveal the new pane
 	var newPageOffset = $("#" + pageId).offset().left;
 	var offsetDelta = $(".wikibrowser-host").scrollLeft();
+	// Subtract 600 to also show page to the left, if the view area is large enough
+	if ($(".wikibrowser-host").width() > 1200) {
+		offsetDelta -= 600;
+	}
 	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 
 	return pageId;
@@ -50,7 +62,12 @@ function addSearchPage() {
 
 	// Scroll to reveal the new pane
 	var newPageOffset = $("#searchPage").offset().left;
-	$(".wikibrowser-host").animate({scrollLeft: newPageOffset}, 400);	
+	var offsetDelta = $(".wikibrowser-host").scrollLeft();
+	// Subtract 600 to also show page to the left, if the view area is large enough
+	if ($(".wikibrowser-host").width() > 1200) {
+		offsetDelta -= 600;
+	}
+	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 
 	var searchBox = $(".wikibrowser-search-content input");
 	searchBox.keyup(function(event) {
@@ -82,7 +99,6 @@ function loadPageIntoElement(page, element) {
 	    cache: 'true' // defaults to false for jsonp.	    
 	})
 	.done(function(data) {
-		console.log("Received: ");
 		if (typeof data.error !== 'undefined') {
 			// TODO: Make it user friendly.
 			$( "#" + element + " > .pre-content > h1" ).append( data.error.code );
@@ -107,7 +123,16 @@ function fixHyperlink(index, element)
 	{
 		jElement.attr('href', "http://en.wikipedia.org" + address);
 		jElement.on('click', function() {
-			loadPageIntoElement(address.substring(6), addPage());
+			var parentPageHost = jElement.closest('.wikibrowser-page-host');
+			loadPageIntoElement(address.substring(6), addPage(parentPageHost));
+			return false; // prevent going to href (wikipedia)
+		})
+	}
+	if (address.substring(0, 19) === '/w/index.php?title=') {
+		jElement.attr('href', "http://en.wikipedia.org" + address);
+		jElement.on('click', function() {
+			var parentPageHost = jElement.closest('.wikibrowser-page-host');
+			loadPageIntoElement(address.substring(19), addPage(parentPageHost));
 			return false; // prevent going to href (wikipedia)
 		})
 	}
@@ -128,7 +153,8 @@ function goToArticle(query) {
 			}
 		}
 		var bestMatch = results.query.search[0];
-		loadPageIntoElement(bestMatch.title, addPage());
+		loadArticle(bestMatch.title);
+		loadPageIntoElement(bestMatch.title, addPage($('#searchPage').closest('.wikibrowser-page-host')));
 	});
 }
 
@@ -163,14 +189,14 @@ function searchArticle(query) {
 function loadArticle(articleName) {
 	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
 	return function() {
-		loadPageIntoElement(articleName, addPage())
+		loadPageIntoElement(articleName, addPage($('#searchPage').closest('.wikibrowser-page-host')));
 	};
 }
 
 function getSearchResults(query, callback) {
 	// See: http://www.mediawiki.org/wiki/API:Search
 	$.ajax({
-	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
+	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=7&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
 	    data: {
 	    	format: 'json'
 	    },
