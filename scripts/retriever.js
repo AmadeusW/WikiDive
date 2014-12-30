@@ -20,12 +20,9 @@ function addPage(previousPage) {
 
 	// Add page to the end of wikibrowser-host's children, or after specified element
 	if (typeof previousPage === 'undefined') {
-		console.log("addPage 1");
 		$(".wikibrowser-host").append(tempContainer.innerHtml);
 	}
 	else {
-		console.log("addPage 2");
-		console.log(previousPage);
 		previousPage.after(tempContainer.innerHtml);
 	}
 	// Scroll to reveal the new pane
@@ -72,7 +69,6 @@ function addSearchPage() {
 	var searchBox = $(".wikibrowser-search-content input");
 	searchBox.keyup(function(event) {
 		if (event.keyCode == 13) {
-			console.log("enter");
 			goToArticle(searchBox[0].value);
 		}
 	});
@@ -143,7 +139,6 @@ function fixHyperlink(index, element)
 }
 
 function goToArticle(query) {
-	console.log("goToArticle " + query);
 	results = getSearchResults(query, function(results) {
 		if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
 		{
