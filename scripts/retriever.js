@@ -72,12 +72,20 @@ function loadPageIntoElement(page, element) {
 	    cache: 'true' // defaults to false for jsonp.	    
 	})
 	.done(function(data) {
-		$( "#" + element + " > .pre-content > h1" ).append( data.parse.displaytitle );
-		$( "#" + element + " > .content" ).append( data.parse.text['*'] );
-		$( "#" + element + " > .content a").each(fixHyperlink);
-		$( "#" + element ).perfectScrollbar({
-			wheelSpeed: 3
-		});
+		console.log("Received: ");
+		if (typeof data.error !== 'undefined') {
+			// TODO: Make it user friendly.
+			$( "#" + element + " > .pre-content > h1" ).append( data.error.code );
+			$( "#" + element + " > .content" ).append( data.error.info );
+		}
+		else {
+			$( "#" + element + " > .pre-content > h1" ).append( data.parse.displaytitle );
+			$( "#" + element + " > .content" ).append( data.parse.text['*'] );
+			$( "#" + element + " > .content a").each(fixHyperlink);
+			$( "#" + element ).perfectScrollbar({
+				wheelSpeed: 3
+			});
+		}
 	});  
 }
 
@@ -157,15 +165,23 @@ function searchArticle(query) {
 		for (var index in results.query.search) {
 			var resultItem = document.createElement("li");
 			var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
-			console.log(displayTitle);
 			$(resultItem).html(displayTitle);
-			console.log(resultItem);
+			$(resultItem).on('click', loadArticle(results.query.search[index].title));
 			$('.wikibrowser-search-results').append(resultItem);
 		}
 		/* If not visible, reveal the results */
 		$('.wikibrowser-search-results-title').show();
 		$('.wikibrowser-search-results').show();		
 	}); 	
+}
+
+function loadArticle(articleName) {
+	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
+	console.log("loadArticle " + articleName);
+	return function() {
+		console.log("inside loadArticle " + articleName);
+		loadPageIntoElement(articleName, addPage())
+	};
 }
 
 function getSearchResults(query, callback) {
