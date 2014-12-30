@@ -169,6 +169,7 @@ function searchArticle(query) {
 }
 
 function getSearchResults(query, callback) {
+	// See: http://www.mediawiki.org/wiki/API:Search
 	console.log("getSearchResults " + query);
 	$.ajax({
 	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
