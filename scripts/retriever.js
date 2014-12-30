@@ -179,7 +179,7 @@ function loadArticle(articleName) {
 function getSearchResults(query, callback) {
 	// See: http://www.mediawiki.org/wiki/API:Search
 	$.ajax({
-	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
+	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=7&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
 	    data: {
 	    	format: 'json'
 	    },
