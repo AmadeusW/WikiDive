@@ -90,12 +90,17 @@
 }
 
 .wikibrowser-search-content input {
-	width: 450px;
 	font-size: 1.4em;
+	width: 450px;
 	line-height: 140%;
 	padding: 6px;
 	border: 1px solid #ccc;	
 	margin: 0 0 6px 0;
+}
+
+.wikibrowser-search-buttons {
+	text-align: right;
+	width: 450px;
 }
 
 .wikibrowser-search-content button {
@@ -103,15 +108,25 @@
 	line-height: 140%;
 	color: #fff;
 	margin: 0 0 2em 0;
-	padding: 6px 12px;
+	padding: 6px 14px;
 }
 
 .wikibrowser-go-button {
 	background-color: #a00;
+	cursor: pointer;
+}
+
+.wikibrowser-go-button:hover {
+	background-color: #c00;
 }
 
 .wikibrowser-search-button {
 	background-color: #00a;
+	cursor: pointer;
+}
+
+.wikibrowser-search-button:hover {
+	background-color: #00d;
 }
 
 .wikibrowser-search-results {

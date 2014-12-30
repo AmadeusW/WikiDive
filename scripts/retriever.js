@@ -43,11 +43,11 @@ function addSearchPage() {
 '			<div class="wikibrowser-page-host">' +
 '				<div class="wikibrowser-page ps-container ps-active-y" id="searchPage">'+
 '					<div class="wikibrowser-search-content">'+
-'                        <p><input type="text" placeholder="Search"></input></p>'+
-'                        <p>'+
-'                        	<button class="wikibrowser-go-button">Go</button>'+
+'                        <div><input type="text" placeholder="Search"></input></div>'+
+'                        <div class="wikibrowser-search-buttons">'+
 '                        	<button class="wikibrowser-search-button">Search...</button>'+
-'                    	</p>'+
+'                        	<button class="wikibrowser-go-button">Go</button>'+
+'                    	 </div>'+
 '                        <p class="wikibrowser-search-results-title"></p>'+
 '                        <ul class="wikibrowser-search-results">'+
 '                        </ul>'+
