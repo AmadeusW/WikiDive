@@ -4,6 +4,7 @@ $( document ).ready(function() {
   //loadPageIntoElement("JSONP", addPage());
   //loadPageIntoElement("Copenhagen", addPage());
   //addSearchPage();
+  setUpSearch();
 });
 
 function addPage() {
@@ -95,4 +96,31 @@ function fixHyperlink(index, element)
 	{
 		jElement.attr('target', "_blank");
 	}
+}
+
+function setUpSearch() {
+	console.log("setUpSearch");
+	var searchBox = $(".wikibrowser-search-content input");
+	searchBox.keyup(function(event) {
+		if (event.keyCode == 13) {
+			console.log("enter");
+			getSearchResult(searchBox[0].value);
+		}
+	});
+	var goButton = $(".wikibrowser-go-button");
+	goButton.on('click', function() {
+		getSearchResult(searchBox[0].value);
+	});	
+	var searchButton = $(".wikibrowser-search-button");
+	searchButton.on('click', function() {
+		getSearchResults(searchBox[0].value);
+	});
+}
+
+function getSearchResult(query) {
+	console.log("getSearchResult " + query);
+}
+
+function getSearchResults(query) {
+	console.log("getSearchResults " + query);
 }

@@ -86,16 +86,31 @@
 /* Search column: */
 
 .wikibrowser-search-content {
-	margin: 50px 0 0 60px;
+	margin: 50px 0 0 30px;
 }
 
 .wikibrowser-search-content input {
-	width: 450px;
+	width: 420px;
 	font-size: 1.4em;
 	line-height: 140%;
 	padding: 6px;
 	border: 1px solid #ccc;	
+	margin: 0 0 6px 0;
+}
+
+.wikibrowser-search-content button {
+	font-size: 1.2em;
+	line-height: 140%;
+	color: #fff;
 	margin: 0 0 2em 0;
+}
+
+.wikibrowser-go-button {
+	background-color: #a00;
+}
+
+.wikibrowser-search-button {
+	background-color: #00a;
 }
 
 .wikibrowser-search-results {
