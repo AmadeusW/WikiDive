@@ -103,7 +103,7 @@ function fixHyperlink(index, element)
 {
 	var jElement = $(element);
 	var address = jElement.attr('href');
-	if (address.substring(0, 6) === '/wiki/')
+	if (address.substring(0, 6) === '/wiki/' && address.substring(0, 11) !== '/wiki/File:')
 	{
 		jElement.attr('href', "http://en.wikipedia.org" + address);
 		jElement.on('click', function() {
