@@ -62,6 +62,7 @@ function addSearchPage() {
 }
 
 function loadPageIntoElement(page, element) {
+	console.log('load page ' + page);
 	$.ajax({
 	    url : "http://en.wikipedia.org/w/api.php?action=parse&format=json&callback=?&continue=&page=" + page,
 	    data: {
@@ -104,23 +105,77 @@ function setUpSearch() {
 	searchBox.keyup(function(event) {
 		if (event.keyCode == 13) {
 			console.log("enter");
-			getSearchResult(searchBox[0].value);
+			goToArticle(searchBox[0].value);
 		}
 	});
 	var goButton = $(".wikibrowser-go-button");
 	goButton.on('click', function() {
-		getSearchResult(searchBox[0].value);
+		goToArticle(searchBox[0].value);
 	});	
 	var searchButton = $(".wikibrowser-search-button");
 	searchButton.on('click', function() {
-		getSearchResults(searchBox[0].value);
+		searchArticle(searchBox[0].value);
 	});
 }
 
-function getSearchResult(query) {
-	console.log("getSearchResult " + query);
+function goToArticle(query) {
+	console.log("goToArticle " + query);
+	results = getSearchResults(query, function(results) {
+		if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
+		{
+			$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
+			if (typeof results.query.searchinfo.suggestion !== 'undefined') {
+				$('.wikibrowser-search-results-title').append(' <br />Did you mean <em>' + results.query.searchinfo.suggestion + '</em>?');
+			}
+			
+		}
+		console.log("Go to: ");
+		var bestMatch = results.query.search[0];
+		console.log(bestMatch);
+		loadPageIntoElement(bestMatch.title, addPage());
+	});
 }
 
-function getSearchResults(query) {
+function searchArticle(query) {
+	console.log("searchArticle " + query);
+	var results = getSearchResults(query, function(results) {
+		if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
+		{
+			$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
+			if (typeof results.query.searchinfo.suggestion !== 'undefined') {
+				$('.wikibrowser-search-results-title').append(' <br />Did you mean <em>' + results.query.searchinfo.suggestion + '</em>?');
+			}			
+		}
+		else
+		{
+			$('.wikibrowser-search-results-title').html('Search results for <em>' + query + '</em>:');
+		}
+		/* Remove existing results */
+		$('.wikibrowser-search-results').html("");
+		console.log("Received search results:");
+		console.log(results.query.search);
+		for (var index in results.query.search) {
+			var resultItem = document.createElement("li");
+			var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
+			console.log(displayTitle);
+			$(resultItem).html(displayTitle);
+			console.log(resultItem);
+			$('.wikibrowser-search-results').append(resultItem);
+		}
+		/* If not visible, reveal the results */
+		$('.wikibrowser-search-results-title').show();
+		$('.wikibrowser-search-results').show();		
+	}); 	
+}
+
+function getSearchResults(query, callback) {
 	console.log("getSearchResults " + query);
+	$.ajax({
+	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
+	    data: {
+	    	format: 'json'
+	    },
+	    dataType: 'jsonp',
+	})
+	.done(callback);
 }

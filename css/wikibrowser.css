@@ -90,7 +90,7 @@
 }
 
 .wikibrowser-search-content input {
-	width: 420px;
+	width: 450px;
 	font-size: 1.4em;
 	line-height: 140%;
 	padding: 6px;
@@ -103,6 +103,7 @@
 	line-height: 140%;
 	color: #fff;
 	margin: 0 0 2em 0;
+	padding: 6px 12px;
 }
 
 .wikibrowser-go-button {
@@ -123,6 +124,11 @@
 	width: 450px;
 	margin: 1em 0 0 0;
 	padding: 0;
+	display: none; /* will be changed via jquery .show() */
+}
+
+.wikibrowser-search-results-title {
+	display: none; /* will be changed via jquery .show() */
 }
 
 .wikibrowser-search-results li {
@@ -134,4 +140,9 @@
 
 .wikibrowser-search-results li:hover {
 	background-color: #eee;
+}
+
+/* class searchmatch is provided by Wikipedia API */
+.wikibrowser-search-results .searchmatch {
+	background-color: #ff0;
 }
