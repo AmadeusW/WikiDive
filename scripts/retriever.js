@@ -128,6 +128,14 @@ function fixHyperlink(index, element)
 			return false; // prevent going to href (wikipedia)
 		})
 	}
+	if (address.substring(0, 19) === '/w/index.php?title=') {
+		jElement.attr('href', "http://en.wikipedia.org" + address);
+		jElement.on('click', function() {
+			var parentPageHost = jElement.closest('.wikibrowser-page-host');
+			loadPageIntoElement(address.substring(19), addPage(parentPageHost));
+			return false; // prevent going to href (wikipedia)
+		})
+	}
 	if (address.substring(0, 1) !== '#')
 	{
 		jElement.attr('target', "_blank");
