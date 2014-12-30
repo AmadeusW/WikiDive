@@ -115,14 +115,17 @@ function fixHyperlink(index, element)
 {
 	var jElement = $(element);
 	var address = jElement.attr('href');
-	if (address.substring(0, 6) === '/wiki/' && address.substring(0, 11) !== '/wiki/File:')
+	if (address.substring(0, 6) === '/wiki/')
 	{
 		jElement.attr('href', "http://en.wikipedia.org" + address);
-		jElement.on('click', function() {
-			var parentPageHost = jElement.closest('.wikibrowser-page-host');
-			loadPageIntoElement(address.substring(6), addPage(parentPageHost));
-			return false; // prevent going to href (wikipedia)
-		})
+		if (address.substring(0, 11) !== '/wiki/File:')
+		{
+			jElement.on('click', function() {
+				var parentPageHost = jElement.closest('.wikibrowser-page-host');
+				loadPageIntoElement(address.substring(6), addPage(parentPageHost));
+				return false; // prevent going to href (wikipedia)
+			});
+		}
 	}
 	if (address.substring(0, 19) === '/w/index.php?title=') {
 		jElement.attr('href', "http://en.wikipedia.org" + address);
