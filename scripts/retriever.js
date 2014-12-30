@@ -1,8 +1,6 @@
 var pageIndex = 0;
 
 $( document ).ready(function() {
-  //loadPageIntoElement("JSONP", addPage());
-  //loadPageIntoElement("Copenhagen", addPage());
   addSearchPage();
 });
 
@@ -24,7 +22,8 @@ function addPage() {
 
 	// Scroll to reveal the new pane
 	var newPageOffset = $("#" + pageId).offset().left;
-	$(".wikibrowser-host").animate({scrollLeft: newPageOffset}, 400);
+	var offsetDelta = $(".wikibrowser-host").scrollLeft();
+	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 
 	return pageId;
 }
@@ -74,7 +73,6 @@ function addSearchPage() {
 }
 
 function loadPageIntoElement(page, element) {
-	console.log('load page ' + page);
 	$.ajax({
 	    url : "http://en.wikipedia.org/w/api.php?action=parse&format=json&callback=?&continue=&page=" + page,
 	    data: {
@@ -128,17 +126,13 @@ function goToArticle(query) {
 			if (typeof results.query.searchinfo.suggestion !== 'undefined') {
 				$('.wikibrowser-search-results-title').append(' <br />Did you mean <em>' + results.query.searchinfo.suggestion + '</em>?');
 			}
-			
 		}
-		console.log("Go to: ");
 		var bestMatch = results.query.search[0];
-		console.log(bestMatch);
 		loadPageIntoElement(bestMatch.title, addPage());
 	});
 }
 
 function searchArticle(query) {
-	console.log("searchArticle " + query);
 	var results = getSearchResults(query, function(results) {
 		if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
 		{
@@ -153,8 +147,6 @@ function searchArticle(query) {
 		}
 		/* Remove existing results */
 		$('.wikibrowser-search-results').html("");
-		console.log("Received search results:");
-		console.log(results.query.search);
 		for (var index in results.query.search) {
 			var resultItem = document.createElement("li");
 			var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
@@ -170,16 +162,13 @@ function searchArticle(query) {
 
 function loadArticle(articleName) {
 	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
-	console.log("loadArticle " + articleName);
 	return function() {
-		console.log("inside loadArticle " + articleName);
 		loadPageIntoElement(articleName, addPage())
 	};
 }
 
 function getSearchResults(query, callback) {
 	// See: http://www.mediawiki.org/wiki/API:Search
-	console.log("getSearchResults " + query);
 	$.ajax({
 	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
 	    data: {
