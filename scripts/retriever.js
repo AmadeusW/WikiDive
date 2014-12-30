@@ -31,6 +31,10 @@ function addPage(previousPage) {
 	// Scroll to reveal the new pane
 	var newPageOffset = $("#" + pageId).offset().left;
 	var offsetDelta = $(".wikibrowser-host").scrollLeft();
+	// Subtract 600 to also show page to the left, if the view area is large enough
+	if ($(".wikibrowser-host").width() > 1200) {
+		offsetDelta -= 600;
+	}
 	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 
 	return pageId;
@@ -58,7 +62,12 @@ function addSearchPage() {
 
 	// Scroll to reveal the new pane
 	var newPageOffset = $("#searchPage").offset().left;
-	$(".wikibrowser-host").animate({scrollLeft: newPageOffset}, 400);	
+	var offsetDelta = $(".wikibrowser-host").scrollLeft();
+	// Subtract 600 to also show page to the left, if the view area is large enough
+	if ($(".wikibrowser-host").width() > 1200) {
+		offsetDelta -= 600;
+	}
+	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 
 	var searchBox = $(".wikibrowser-search-content input");
 	searchBox.keyup(function(event) {
