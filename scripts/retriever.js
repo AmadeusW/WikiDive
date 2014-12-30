@@ -49,6 +49,10 @@ function addSearchPage() {
 
 	$(".wikibrowser-host").append(tempContainer.innerHtml);
 
+	// Scroll to reveal the new pane
+	var newPageOffset = $("#searchPage").offset().left;
+	$(".wikibrowser-host").animate({scrollLeft: newPageOffset}, 400);	
+
 	var searchBox = $(".wikibrowser-search-content input");
 	searchBox.keyup(function(event) {
 		if (event.keyCode == 13) {
