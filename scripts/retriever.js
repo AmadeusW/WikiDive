@@ -3,8 +3,7 @@ var pageIndex = 0;
 $( document ).ready(function() {
   //loadPageIntoElement("JSONP", addPage());
   //loadPageIntoElement("Copenhagen", addPage());
-  //addSearchPage();
-  setUpSearch();
+  addSearchPage();
 });
 
 function addPage() {
@@ -31,34 +30,43 @@ function addPage() {
 }
 
 function addSearchPage() {
-	var pageId = "page" + pageIndex++;
-
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
 '			<div class="wikibrowser-page-host">' +
-'				<div class="wikibrowser-page ps-container ps-active-y" id="' + pageId + '">'+
-'					<div class="pre-content">'+
-'						<h1 id="section_0"></h1>'+
-'					</div>'+
-'					<div id="content" class="content">'+
-'                        <p><strong>Search</strong><br />'+
-'                        <input type="text" placeholder="Coming soon"></input></p>'+
-'                        <p>Other upcoming features:<br />'+
-'                            <ul>'+
-'                                <li>Close and rearrange articles</li>'+
-'                                <li>Set bookmarks and leave notes</li>'+
-'                                <li>Save, restore and share your layout</li>'+
-'                            </ul>'+
-'                        </p>'+
-'                        <p><strong>How do I use this?</strong><br />'+
-'                        Click on links in Wikipedia articles on the left. They will open new articles side by side!</p>'+
+'				<div class="wikibrowser-page ps-container ps-active-y" id="searchPage">'+
+'					<div class="wikibrowser-search-content">'+
+'                        <p><input type="text" placeholder="Search"></input></p>'+
+'                        <p>'+
+'                        	<button class="wikibrowser-go-button">Go</button>'+
+'                        	<button class="wikibrowser-search-button">Search...</button>'+
+'                    	</p>'+
+'                        <p class="wikibrowser-search-results-title"></p>'+
+'                        <ul class="wikibrowser-search-results">'+
+'                        </ul>'+
 '                   </div>'+
 '				</div>'+
 '			</div>';
 
 	$(".wikibrowser-host").append(tempContainer.innerHtml);
 
-	return pageId;	
+	var searchBox = $(".wikibrowser-search-content input");
+	searchBox.keyup(function(event) {
+		if (event.keyCode == 13) {
+			console.log("enter");
+			goToArticle(searchBox[0].value);
+		}
+	});
+	var goButton = $(".wikibrowser-go-button");
+	goButton.on('click', function() {
+		goToArticle(searchBox[0].value);
+	});	
+	var searchButton = $(".wikibrowser-search-button");
+	searchButton.on('click', function() {
+		searchArticle(searchBox[0].value);
+	});
+	$( ".wikibrowser-search-content" ).parent().perfectScrollbar({
+		wheelSpeed: 3
+	});	
 }
 
 function loadPageIntoElement(page, element) {
@@ -105,28 +113,6 @@ function fixHyperlink(index, element)
 	{
 		jElement.attr('target', "_blank");
 	}
-}
-
-function setUpSearch() {
-	console.log("setUpSearch");
-	var searchBox = $(".wikibrowser-search-content input");
-	searchBox.keyup(function(event) {
-		if (event.keyCode == 13) {
-			console.log("enter");
-			goToArticle(searchBox[0].value);
-		}
-	});
-	var goButton = $(".wikibrowser-go-button");
-	goButton.on('click', function() {
-		goToArticle(searchBox[0].value);
-	});	
-	var searchButton = $(".wikibrowser-search-button");
-	searchButton.on('click', function() {
-		searchArticle(searchBox[0].value);
-	});
-	$( ".wikibrowser-search-content" ).parent().perfectScrollbar({
-		wheelSpeed: 3
-	});
 }
 
 function goToArticle(query) {
