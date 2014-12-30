@@ -4,13 +4,13 @@
 	<meta charset="utf-8">
 
 	<title>Wiki Browser</title>
-	<meta name="description" content="The HTML5 Herald">
+	<meta name="description" content="Explore Wikipedia article by article.">
 	<meta name="author" content="Amadeus Wieczorek">
 
 	<link rel="stylesheet" href="css/wikibrowser.css?v=1.0">
 	<link rel="stylesheet" href="css/perfect-scrollbar.min.css">
-	<link rel="stylesheet" href="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=ext.gadget.switcher%7Cmediawiki.ui.button%7Cmobile.pagelist.styles%7Cskins.minerva.chrome.styles%7Cskins.minerva.content.styles%7Cskins.minerva.drawers.styles%7Cskins.minerva.tablet.styles&amp;only=styles&amp;skin=minerva&amp;target=mobile&amp;*">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=ext.gadget.switcher%7Cmediawiki.ui.button%7Cmobile.pagelist.styles%7Cskins.minerva.chrome.styles%7Cskins.minerva.content.styles%7Cskins.minerva.drawers.styles%7Cskins.minerva.tablet.styles&amp;only=styles&amp;skin=minerva&amp;target=mobile&amp;*">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="scripts/perfect-scrollbar.min.js"></script>
 	<script src="scripts/retriever.js"></script>
 </head>
@@ -29,7 +29,19 @@
 	
 	<div class="mediawiki ltr sitedir-ltr stable mw-mobile-mode skin-minerva action-view">
 		<div class="wikibrowser-host">
-
+			<div class="wikibrowser-page-host">
+				<div class="wikibrowser-page ps-container ps-active-y" id="tempPage">
+					<div class="wikibrowser-search-content">
+                        <p><input type="text" placeholder="Search"></input></p>
+                        <p>Search results for <em>Copenhagen</em>:</p>
+                        <ul class="wikibrowser-search-results">
+                            <li>Result 1</li>
+                            <li>Copenhagen</li>
+                            <li>Henry Thorvaldsen</li>
+                        </ul>
+                   </div>
+				</div>
+			</div>
 		</div>
 	</div>
 

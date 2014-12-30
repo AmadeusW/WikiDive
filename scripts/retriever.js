@@ -1,9 +1,9 @@
 var pageIndex = 0;
 
 $( document ).ready(function() {
-  loadPageIntoElement("JSONP", addPage());
-  loadPageIntoElement("Copenhagen", addPage());
-  addSearchPage()
+  //loadPageIntoElement("JSONP", addPage());
+  //loadPageIntoElement("Copenhagen", addPage());
+  //addSearchPage();
 });
 
 function addPage() {
@@ -11,7 +11,7 @@ function addPage() {
 
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
-'			<div class="wikibrowser-page-host">' +
+'			<div class="wikibrowser-page-host wikibrowser-page-shadow">' +
 '				<div class="wikibrowser-page ps-container ps-active-y" id="' + pageId + '">'+
 '					<div class="pre-content">'+
 '						<h1 id="section_0"></h1>'+
