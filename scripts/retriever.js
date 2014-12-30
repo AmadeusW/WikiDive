@@ -124,6 +124,9 @@ function setUpSearch() {
 	searchButton.on('click', function() {
 		searchArticle(searchBox[0].value);
 	});
+	$( ".wikibrowser-search-content" ).parent().perfectScrollbar({
+		wheelSpeed: 3
+	});
 }
 
 function goToArticle(query) {
