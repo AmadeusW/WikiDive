@@ -161,3 +161,10 @@
 .wikibrowser-search-results .searchmatch {
 	background-color: #ff0;
 }
+
+.wikibrowser-search-suggestion {
+	cursor: pointer;
+	color: #a00;
+	font-weight: bold;
+	text-decoration: underline;
+}

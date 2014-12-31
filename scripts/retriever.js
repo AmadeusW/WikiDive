@@ -162,7 +162,12 @@ function searchArticle(query) {
 		{
 			$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
 			if (typeof results.query.searchinfo.suggestion !== 'undefined') {
-				$('.wikibrowser-search-results-title').append(' <br />Did you mean <em>' + results.query.searchinfo.suggestion + '</em>?');
+				$('.wikibrowser-search-results-title').append(' <br />Did you mean <a class="wikibrowser-search-suggestion">' + results.query.searchinfo.suggestion + '</a>?');
+				// When user clicks on the suggestion, we're automatically searching:
+				$('.wikibrowser-search-results-title .wikibrowser-search-suggestion a').on('click', function() {
+					$('#searchPage input').val(results.query.searchinfo.suggestion);
+					searchArticle(results.query.searchinfo.suggestion);
+				})
 			}			
 		}
 		else
