@@ -143,50 +143,57 @@ function fixHyperlink(index, element)
 
 function goToArticle(query) {
 	results = getSearchResults(query, function(results) {
-		if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
-		{
-			$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
-			if (typeof results.query.searchinfo.suggestion !== 'undefined') {
-				$('.wikibrowser-search-results-title').append(' <br />Did you mean <em>' + results.query.searchinfo.suggestion + '</em>?');
-			}
+		if (verifyResults(query, results)) {
+			var bestMatch = results.query.search[0];
+			loadArticle(bestMatch.title);
+			loadPageIntoElement(bestMatch.title, addPage($('#searchPage').closest('.wikibrowser-page-host')));
 		}
-		var bestMatch = results.query.search[0];
-		loadArticle(bestMatch.title);
-		loadPageIntoElement(bestMatch.title, addPage($('#searchPage').closest('.wikibrowser-page-host')));
 	});
 }
 
 function searchArticle(query) {
 	var results = getSearchResults(query, function(results) {
-		if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
-		{
-			$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
-			if (typeof results.query.searchinfo.suggestion !== 'undefined') {
-				$('.wikibrowser-search-results-title').append(' <br />Did you mean <a class="wikibrowser-search-suggestion">' + results.query.searchinfo.suggestion + '</a>?');
-				// When user clicks on the suggestion, we're automatically searching:
-				$('.wikibrowser-search-results-title .wikibrowser-search-suggestion a').on('click', function() {
-					$('#searchPage input').val(results.query.searchinfo.suggestion);
-					searchArticle(results.query.searchinfo.suggestion);
-				})
-			}			
-		}
-		else
-		{
+		if (verifyResults(query, results)) {
 			$('.wikibrowser-search-results-title').html('Search results for <em>' + query + '</em>:');
+			/* Remove existing results */
+			$('.wikibrowser-search-results').html("");
+			for (var index in results.query.search) {
+				var resultItem = document.createElement("li");
+				var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
+				$(resultItem).html(displayTitle);
+				$(resultItem).on('click', loadArticle(results.query.search[index].title));
+				$('.wikibrowser-search-results').append(resultItem);
+			}
+			/* If not visible, reveal the results */
+			$('.wikibrowser-search-results-title').show();
+			$('.wikibrowser-search-results').show();
 		}
-		/* Remove existing results */
-		$('.wikibrowser-search-results').html("");
-		for (var index in results.query.search) {
-			var resultItem = document.createElement("li");
-			var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
-			$(resultItem).html(displayTitle);
-			$(resultItem).on('click', loadArticle(results.query.search[index].title));
-			$('.wikibrowser-search-results').append(resultItem);
-		}
-		/* If not visible, reveal the results */
-		$('.wikibrowser-search-results-title').show();
-		$('.wikibrowser-search-results').show();		
 	}); 	
+}
+
+function verifyResults(query, results) {
+	if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
+	{
+		$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
+		console.log("WTF1");
+		if (typeof results.query.searchinfo.suggestion !== 'undefined') {
+			console.log("WTF2");
+			$('.wikibrowser-search-results-title').append(' <br />Did you mean <a class="wikibrowser-search-suggestion">' + results.query.searchinfo.suggestion + '</a>?');
+			// When user clicks on the suggestion, we're automatically searching:
+			console.log("Registering suggestion " + results.query.searchinfo.suggestion);
+			$('.wikibrowser-search-results-title .wikibrowser-search-suggestion').on('click', function() {
+				console.log("Clicked on suggestion " + results.query.searchinfo.suggestion);
+				$('#searchPage input').val(results.query.searchinfo.suggestion);
+				searchArticle(results.query.searchinfo.suggestion);
+			})
+		}
+		$('.wikibrowser-search-results-title').show();
+		$('.wikibrowser-search-results').hide();
+		return false;
+	}
+	else {
+		return true;
+	}
 }
 
 function loadArticle(articleName) {
