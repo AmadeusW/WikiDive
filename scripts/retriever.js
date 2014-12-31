@@ -1,7 +1,7 @@
 var pageIndex = 0;
 
 $( document ).ready(function() {
-  addSearchPage();
+  setUpSearch();
 });
 
 function addPage(previousPage) {
@@ -41,27 +41,8 @@ function addPage(previousPage) {
 	return pageId;
 }
 
-function addSearchPage() {
-	var tempContainer = document.createElement("div");
-	tempContainer.innerHtml = 
-'			<div class="wikibrowser-page-host" id="searchPageHost">' +
-'				<div class="wikibrowser-page ps-container ps-active-y" id="searchPage">'+
-'					<div class="wikibrowser-search-content">'+
-'                        <div><input type="text" placeholder="Search"></input></div>'+
-'                        <div class="wikibrowser-search-buttons">'+
-'                        	<button class="wikibrowser-search-button">Search...</button>'+
-'                        	<button class="wikibrowser-go-button">Go</button>'+
-'                    	 </div>'+
-'                        <p class="wikibrowser-search-results-title"></p>'+
-'                        <ul class="wikibrowser-search-results">'+
-'                        </ul>'+
-'                   </div>'+
-'				</div>'+
-'			</div>';
-
-	$(".wikibrowser-host").append(tempContainer.innerHtml);
-
-	var searchBox = $(".wikibrowser-search-content input");
+function setUpSearch() {
+	var searchBox = $("#searchPage input");
 	searchBox.keyup(function(event) {
 		if (event.keyCode == 13) {
 			goToArticle(searchBox[0].value);
@@ -75,7 +56,7 @@ function addSearchPage() {
 	searchButton.on('click', function() {
 		searchArticle(searchBox[0].value);
 	});
-	$( ".wikibrowser-search-content" ).parent().perfectScrollbar({
+	$( "#searchPageHost" ).perfectScrollbar({
 		wheelSpeed: 3
 	});	
 }
