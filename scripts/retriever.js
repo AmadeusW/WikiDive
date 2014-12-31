@@ -25,6 +25,10 @@ function addPage(previousPage) {
 	else {
 		previousPage.after(tempContainer.innerHtml);
 	}
+
+	// Move the search page to the very right. Do it before we calculate where to scroll.
+	resetSearch();
+
 	// Scroll to reveal the new pane
 	var newPageOffset = $("#" + pageId).offset().left;
 	var offsetDelta = $(".wikibrowser-host").scrollLeft();
@@ -40,7 +44,7 @@ function addPage(previousPage) {
 function addSearchPage() {
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
-'			<div class="wikibrowser-page-host">' +
+'			<div class="wikibrowser-page-host" id="searchPageHost">' +
 '				<div class="wikibrowser-page ps-container ps-active-y" id="searchPage">'+
 '					<div class="wikibrowser-search-content">'+
 '                        <div><input type="text" placeholder="Search"></input></div>'+
@@ -56,15 +60,6 @@ function addSearchPage() {
 '			</div>';
 
 	$(".wikibrowser-host").append(tempContainer.innerHtml);
-
-	// Scroll to reveal the new pane
-	var newPageOffset = $("#searchPage").offset().left;
-	var offsetDelta = $(".wikibrowser-host").scrollLeft();
-	// Subtract 600 to also show page to the left, if the view area is large enough
-	if ($(".wikibrowser-host").width() > 1200) {
-		offsetDelta -= 600;
-	}
-	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 
 	var searchBox = $(".wikibrowser-search-content input");
 	searchBox.keyup(function(event) {
@@ -146,7 +141,7 @@ function goToArticle(query) {
 		if (verifyResults(query, results)) {
 			var bestMatch = results.query.search[0];
 			loadArticle(bestMatch.title);
-			loadPageIntoElement(bestMatch.title, addPage($('#searchPage').closest('.wikibrowser-page-host')));
+			loadPageIntoElement(bestMatch.title, addPage($('#searchPageHost')));
 		}
 	});
 }
@@ -199,7 +194,7 @@ function verifyResults(query, results) {
 function loadArticle(articleName) {
 	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
 	return function() {
-		loadPageIntoElement(articleName, addPage($('#searchPage').closest('.wikibrowser-page-host')));
+		loadPageIntoElement(articleName, addPage($('#searchPageHost')));
 	};
 }
 
@@ -213,4 +208,12 @@ function getSearchResults(query, callback) {
 	    dataType: 'jsonp',
 	})
 	.done(callback);
+}
+
+function resetSearch() {
+	$('.wikibrowser-search-results-title').hide();
+	$('.wikibrowser-search-results').hide();
+	$('#searchPage input').val("");
+	// Moves the #searchPageHost to the far right.
+	$(".wikibrowser-host").append($("#searchPageHost"));
 }
