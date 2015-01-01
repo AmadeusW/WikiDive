@@ -72,15 +72,68 @@
 }
 
 .wikibrowser-header .right-align {
-	display: inline-block;
 	float: right;
 	margin-right: 53px;
-	padding-top: 12px;
 }
 
 .wikibrowser-header .divider {
 	padding-left: 1em;
 	padding-right: 1em;
+}
+
+.wikibrowser-header .header-element {
+	display: block;
+	float: left;
+	padding: 10px 1em 0 1em;
+	height: 40px;
+	top: 0;	
+	position: relative;
+	text-decoration: none;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+}
+
+.wikibrowser-header .header-element:hover {
+	background-color: #fff;
+	text-decoration: none;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+
+.wikibrowser-header #moving-tooltip {
+	position: absolute;
+	top: 46px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	z-index: 10;
+	border-radius: 5px;
+	padding: 4px 1em;
+	margin: 0 1em;
+}
+
+.wikibrowser-header #moving-tooltip::before {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: 50%;
+	color: #fff;
+	z-index: 10;
+	/* Upwards pointing triangle */
+	height: 0;
+	width: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid rgba(0, 0, 0, 0.5);
+}
+
+.github-icon {
+	display: inline-block;
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTMycHgiIGhlaWdodD0iNjZweCIgdmlld0JveD0iMCAwIDEzMiA2NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTMyIDY2IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsPSIjMzMzMzMzIiBkPSJNMzMsMS44Yy0xNy43LDAtMzIsMTQuMy0zMiwzMmMwLDE0LjEsOS4yLDI2LjEsMjEuOSwzMC40DQoJYzEuNiwwLjMsMi4yLTAuNywyLjItMS41YzAtMC44LDAtMi44LDAtNS40Yy04LjksMS45LTEwLjgtNC4zLTEwLjgtNC4zYy0xLjUtMy43LTMuNi00LjctMy42LTQuN2MtMi45LTIsMC4yLTEuOSwwLjItMS45DQoJYzMuMiwwLjIsNC45LDMuMyw0LjksMy4zYzIuOSw0LjksNy41LDMuNSw5LjMsMi43YzAuMy0yLjEsMS4xLTMuNSwyLTQuM2MtNy4xLTAuOC0xNC42LTMuNi0xNC42LTE1LjhjMC0zLjUsMS4yLTYuMywzLjMtOC42DQoJYy0wLjMtMC44LTEuNC00LjEsMC4zLTguNWMwLDAsMi43LTAuOSw4LjgsMy4zYzIuNi0wLjcsNS4zLTEuMSw4LTEuMWMyLjcsMCw1LjUsMC40LDgsMS4xYzYuMS00LjEsOC44LTMuMyw4LjgtMy4zDQoJYzEuNyw0LjQsMC42LDcuNywwLjMsOC41YzIuMSwyLjIsMy4zLDUuMSwzLjMsOC42YzAsMTIuMy03LjUsMTUtMTQuNiwxNS44YzEuMSwxLDIuMiwyLjksMi4yLDUuOWMwLDQuMywwLDcuNywwLDguOA0KCWMwLDAuOSwwLjYsMS45LDIuMiwxLjVDNTUuOCw1OS45LDY1LDQ3LjksNjUsMzMuOEM2NSwxNi4xLDUwLjcsMS44LDMzLDEuOHoiLz4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsPSIjRkZGRkZGIiBkPSJNOTksMS44Yy0xNy43LDAtMzIsMTQuMy0zMiwzMmMwLDE0LjEsOS4yLDI2LjEsMjEuOSwzMC40DQoJYzEuNiwwLjMsMi4yLTAuNywyLjItMS41YzAtMC44LDAtMi44LDAtNS40Yy04LjksMS45LTEwLjgtNC4zLTEwLjgtNC4zYy0xLjUtMy43LTMuNi00LjctMy42LTQuN2MtMi45LTIsMC4yLTEuOSwwLjItMS45DQoJYzMuMiwwLjIsNC45LDMuMyw0LjksMy4zYzIuOSw0LjksNy41LDMuNSw5LjMsMi43YzAuMy0yLjEsMS4xLTMuNSwyLTQuM2MtNy4xLTAuOC0xNC42LTMuNi0xNC42LTE1LjhjMC0zLjUsMS4yLTYuMywzLjMtOC42DQoJYy0wLjMtMC44LTEuNC00LjEsMC4zLTguNWMwLDAsMi43LTAuOSw4LjgsMy4zYzIuNi0wLjcsNS4zLTEuMSw4LTEuMWMyLjcsMCw1LjUsMC40LDgsMS4xYzYuMS00LjEsOC44LTMuMyw4LjgtMy4zDQoJYzEuNyw0LjQsMC42LDcuNywwLjMsOC41YzIuMSwyLjIsMy4zLDUuMSwzLjMsOC42YzAsMTIuMy03LjUsMTUtMTQuNiwxNS44YzEuMSwxLDIuMiwyLjksMi4yLDUuOWMwLDQuMywwLDcuNywwLDguOA0KCWMwLDAuOSwwLjYsMS45LDIuMiwxLjVjMTIuNy00LjIsMjEuOS0xNi4yLDIxLjktMzAuNEMxMzEsMTYuMSwxMTYuNywxLjgsOTksMS44eiIvPg0KPC9zdmc+DQo=);
+	background-size: 40px 20px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	width: 20px;
+	height: 20px;
 }
 
 /* Search column: */
