@@ -21,12 +21,26 @@
 		<h1>
 			WikiBrowser
 		</h1>
+		<div class="article-icons">
+		<a href="#" target="_blank" class="header-element" alt="This is a test of the tooltip mechanism.">Test</a>
+		<a href="#" target="_blank" class="header-element" alt="Another tooltip test">Test 2</a>
+		</div>
+		<div class="extra-icons"><a href="#" class="header-element" alt="<em>Search</em>"><span class="search-icon"></span></a></div>
+
 		<!--<span class="divider"></span>-->
 		<div class="right-align">
-			<a href="http://github.com/AmadeusW/WikiBrowser" target="_blank" class="header-element" alt="View on GitHub"><span class="github-icon"></span></a>
-			<a href="http://codeconnect.io/" target="_blank" class="header-element" alt="Inspired by Code Connect">CC</a>
+			<a href="http://github.com/AmadeusW/WikiBrowser" target="_blank" class="header-element" alt="WikiBrowser on GitHub"><span class="github-icon"></span></a>
+			<a href="http://codeconnect.io/" target="_blank" class="header-element" alt="Inspired by Code Connect"><img class="codeconnect-icon" src="content/codeconnect.ico" /></a>
 		</div>
-		<div id="moving-tooltip">Test very long sentence that has a large width.</div>
+		<div id="moving-tooltip">
+			<div id="visible-tooltip">
+				<span>WikiBrowser</span>
+			</div>
+			<div id="hidden-tooltip">
+				<span>WikiBrowser</span>
+			</div>
+		</div>
+		<div id="tooltip-pointer"></div>
 	</header>
 	
 	<div class="mediawiki ltr sitedir-ltr stable mw-mobile-mode skin-minerva action-view">
