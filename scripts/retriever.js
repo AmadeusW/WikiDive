@@ -9,8 +9,8 @@ function addPage(previousPage) {
 
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
-'			<div class="wikibrowser-page-host wikibrowser-page-shadow">' +
-'				<div class="wikibrowser-page ps-container ps-active-y" id="' + pageId + '">'+
+'			<div class="wikibrowser-page-host wikibrowser-page-shadow" id="' + pageId + '">' +
+'				<div class="wikibrowser-page ps-container ps-active-y">'+
 '					<div class="pre-content">'+
 '						<h1 id="section_0"></h1>'+
 '					</div>'+
@@ -74,13 +74,13 @@ function loadPageIntoElement(page, element) {
 		if (typeof data.error !== 'undefined') {
 			// TODO: Make it user friendly.
 			$( "#" + element + " > .pre-content > h1" ).append( data.error.code );
-			$( "#" + element + " > .content" ).append( data.error.info );
+			$( "#" + element + " > .wikibrowser-page > .content" ).append( data.error.info );
 		}
 		else {
 			$( "#" + element + " > .pre-content > h1" ).append( data.parse.displaytitle );
-			$( "#" + element + " > .content" ).append( data.parse.text['*'] );
-			$( "#" + element + " > .content a").each(fixHyperlink);
-			$( "#" + element ).perfectScrollbar({
+			$( "#" + element + " > .wikibrowser-page > .content" ).append( data.parse.text['*'] );
+			$( "#" + element + " > .wikibrowser-page > .content a").each(fixHyperlink);
+			$( "#" + element + " > .wikibrowser-page").perfectScrollbar({
 				wheelSpeed: 3
 			});
 		}
