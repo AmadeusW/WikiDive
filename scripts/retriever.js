@@ -56,7 +56,7 @@ function setUpSearch() {
 	searchButton.on('click', function() {
 		searchArticle(searchBox[0].value);
 	});
-	$( "#searchPageHost" ).perfectScrollbar({
+	$( "#searchPage" ).perfectScrollbar({
 		wheelSpeed: 3
 	});	
 }
