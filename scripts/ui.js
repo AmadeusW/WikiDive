@@ -3,6 +3,7 @@ var movingTooltipPointer;
 var movingTooltipFinalContent;
 var movingTooltipTempContent;
 var header;
+var articleIconsHost;
 var hoveredElements = 0;
 
 $( document ).ready(function() {
@@ -17,11 +18,15 @@ $( document ).ready(function() {
 function setUpTooltips() {
 	var elements = $(".wikibrowser-header .header-element");
 	$.each(elements, function(index, element) {
-		$(element).hover(mouseEnter, mouseLeave);
+		setUpTooltip($(element));
 	});
 }
 
-function mouseEnter() {
+function setUpTooltip(jElement) {
+	jElement.hover(headerElementMouseEnter, headerElementMouseLeave);
+}
+
+function headerElementMouseEnter() {
 	hoveredElements++;
 
 	var jElement = $(this);
@@ -109,7 +114,7 @@ function mouseEnter() {
 	);
 }
 
-function mouseLeave() {
+function headerElementMouseLeave() {
 	hoveredElements--;
 	if (hoveredElements == 0) {
 		movingTooltip.stop().animate(
