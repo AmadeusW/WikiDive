@@ -1,19 +1,18 @@
 var pageIndex = 0;
+var articleTable = [];
 
 $( document ).ready(function() {
   setUpSearch();
 });
 
-function addPage(previousPage) {
-	var pageId = "page" + pageIndex++;
-
+function createColumnAfter(previousPage, pageId) {
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
-'			<div class="wikibrowser-page-host wikibrowser-page-shadow">' +
-'				<div class="wikibrowser-page ps-container ps-active-y" id="' + pageId + '">'+
-'					<div class="pre-content">'+
-'						<h1 id="section_0"></h1>'+
-'					</div>'+
+'			<div class="wikibrowser-page-host wikibrowser-page-shadow" id="' + pageId + '">' +
+'				<div class="wikibrowser-page-header">' +
+'					<h2></h2>' +
+'				</div>'+
+'				<div class="wikibrowser-page ps-container ps-active-y">'+
 '					<div id="content" class="content"></div>'+
 '				</div>'+
 '			</div>';
@@ -29,14 +28,7 @@ function addPage(previousPage) {
 	// Move the search page to the very right. Do it before we calculate where to scroll.
 	resetSearch();
 
-	// Scroll to reveal the new pane
-	var newPageOffset = $("#" + pageId).offset().left;
-	var offsetDelta = $(".wikibrowser-host").scrollLeft();
-	// Subtract 600 to also show page to the left, if the view area is large enough
-	if ($(".wikibrowser-host").width() > 1200) {
-		offsetDelta -= 600;
-	}
-	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
+	scrollToPageId(pageId);
 
 	return pageId;
 }
@@ -73,14 +65,14 @@ function loadPageIntoElement(page, element) {
 	.done(function(data) {
 		if (typeof data.error !== 'undefined') {
 			// TODO: Make it user friendly.
-			$( "#" + element + " > .pre-content > h1" ).append( data.error.code );
-			$( "#" + element + " > .content" ).append( data.error.info );
+			$( "#" + element + " > .wikibrowser-page-header > h2" ).append( data.error.code );
+			$( "#" + element + " .wikibrowser-page > .content" ).append( data.error.info );
 		}
 		else {
-			$( "#" + element + " > .pre-content > h1" ).append( data.parse.displaytitle );
-			$( "#" + element + " > .content" ).append( data.parse.text['*'] );
-			$( "#" + element + " > .content a").each(fixHyperlink);
-			$( "#" + element ).perfectScrollbar({
+			$( "#" + element + " > .wikibrowser-page-header > h2" ).append( data.parse.displaytitle );
+			$( "#" + element + " .wikibrowser-page > .content" ).append( data.parse.text['*'] );
+			$( "#" + element + " .wikibrowser-page > .content a").each(fixHyperlink);
+			$( "#" + element + " .wikibrowser-page").perfectScrollbar({
 				wheelSpeed: 3
 			});
 		}
@@ -98,7 +90,7 @@ function fixHyperlink(index, element)
 		{
 			jElement.on('click', function() {
 				var parentPageHost = jElement.closest('.wikibrowser-page-host');
-				loadPageIntoElement(address.substring(6), addPage(parentPageHost));
+				loadArticle(address.substring(6), parentPageHost);
 				return false; // prevent going to href (wikipedia)
 			});
 		}
@@ -107,7 +99,7 @@ function fixHyperlink(index, element)
 		jElement.attr('href', "http://en.wikipedia.org" + address);
 		jElement.on('click', function() {
 			var parentPageHost = jElement.closest('.wikibrowser-page-host');
-			loadPageIntoElement(address.substring(19), addPage(parentPageHost));
+			loadArticle(address.substring(19), parentPageHost);
 			return false; // prevent going to href (wikipedia)
 		})
 	}
@@ -121,8 +113,7 @@ function goToArticle(query) {
 	results = getSearchResults(query, function(results) {
 		if (verifyResults(query, results)) {
 			var bestMatch = results.query.search[0];
-			loadArticle(bestMatch.title);
-			loadPageIntoElement(bestMatch.title, addPage($('#searchPageHost')));
+			loadArticle(bestMatch.title, $('#searchPageHost'));
 		}
 	});
 }
@@ -137,7 +128,7 @@ function searchArticle(query) {
 				var resultItem = document.createElement("li");
 				var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
 				$(resultItem).html(displayTitle);
-				$(resultItem).on('click', loadArticle(results.query.search[index].title));
+				$(resultItem).on('click', loadArticleHandler(results.query.search[index].title));
 				$('.wikibrowser-search-results').append(resultItem);
 			}
 			/* If not visible, reveal the results */
@@ -172,11 +163,29 @@ function verifyResults(query, results) {
 	}
 }
 
-function loadArticle(articleName) {
+/**
+ * Handler that calls loadArticle and places the new function after the search results.
+ * @param {string} articleName - title of the Wikipedia article to load
+ */
+function loadArticleHandler(articleName) {
 	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
 	return function() {
-		loadPageIntoElement(articleName, addPage($('#searchPageHost')));
+		loadArticle(articleName, $('#searchPageHost'));
 	};
+}
+
+/**
+ * Check if article has been loaded. If not, loads the article and places it after specified article
+ * @param {string} articleName - title of the Wikipedia article to load
+ * @param {string} loadLocation - ID of element after which the article will be rendered.
+ */
+function loadArticle(articleName, previousElement) {
+	if (!isArticleLoaded(articleName)) {
+		var pageId = "page" + pageIndex++;
+		articleTable[articleName] = pageId;
+		createHeaderElementForArticle(articleName, pageId);
+		loadPageIntoElement(articleName, createColumnAfter(previousElement, pageId));
+	}
 }
 
 function getSearchResults(query, callback) {
@@ -197,4 +206,8 @@ function resetSearch() {
 	$('#searchPage input').val("");
 	// Moves the #searchPageHost to the far right.
 	$(".wikibrowser-host").append($("#searchPageHost"));
+}
+
+function isArticleLoaded(articleName) {
+	return articleTable.indexOf(articleName) > -1;
 }

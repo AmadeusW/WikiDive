@@ -3,6 +3,8 @@ var movingTooltipPointer;
 var movingTooltipFinalContent;
 var movingTooltipTempContent;
 var header;
+var articleIconsHost;
+var wikiBrowserHost;
 var hoveredElements = 0;
 
 $( document ).ready(function() {
@@ -11,17 +13,53 @@ $( document ).ready(function() {
 	movingTooltipTempContent = $('#hidden-tooltip span');
 	movingTooltipPointer = $('#tooltip-pointer');
 	header = $('.wikibrowser-header'); // TODO: make it an ID
-	setUpTooltips();
+	articleIconsHost = $('#wikibrowser-article-icons');
+	wikiBrowserHost = $('.wikibrowser-host'); // TODO: make it an ID
+	setUpInitialMouseEvents();
 });
 
-function setUpTooltips() {
+function setUpInitialMouseEvents() {
 	var elements = $(".wikibrowser-header .header-element");
 	$.each(elements, function(index, element) {
-		$(element).hover(mouseEnter, mouseLeave);
+		setUpMouseEvents($(element));
 	});
 }
 
-function mouseEnter() {
+function setUpMouseEvents(jElement) {
+	jElement.hover(headerElementMouseEnter, headerElementMouseLeave);
+	jElement.click(headerElementClick);
+}
+
+function createHeaderElementForArticle(articleName, pageID) {
+	// Remove &redirect=no
+	if (articleName.indexOf('&') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('&'));
+	}
+	// Remove #anchor
+	if (articleName.indexOf('#') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('#'));
+	}	
+	// '_' -> ' ' for nice tooltip and simpler regex
+	articleName = articleName.replace(/_/g, " ");	
+
+	// Capture first letters of words
+	var acronym = articleName.match(/\b([a-zA-Z])/g).join(''); 
+	// Limit length of the acronym
+	acronym = acronym.substring(0, 6);
+
+	// Create the header element
+	var $element = $("<a>", {
+		target: "_blank",
+		class: "header-element",
+		alt: articleName
+	})
+	$element.html(acronym);
+	$element.data("associated-page", pageID);
+	setUpMouseEvents($element);
+	articleIconsHost.append($element);
+}
+
+function headerElementMouseEnter() {
 	hoveredElements++;
 
 	var jElement = $(this);
@@ -109,7 +147,7 @@ function mouseEnter() {
 	);
 }
 
-function mouseLeave() {
+function headerElementMouseLeave() {
 	hoveredElements--;
 	if (hoveredElements == 0) {
 		movingTooltip.stop().animate(
@@ -140,4 +178,23 @@ function mouseLeave() {
  			}
  		);		
 	}
+}
+
+function headerElementClick() {
+	var jElement = $(this);
+	var pageId = jElement.data("associated-page");
+	if (typeof pageId !== 'undefined')
+	{
+		scrollToPageId(pageId);
+	}
+}
+
+function scrollToPageId(pageId) {
+	var newPageOffset = $("#" + pageId).offset().left;
+	var offsetDelta = wikiBrowserHost.scrollLeft();
+	// Subtract 600 to also show page to the left, if the view area is large enough
+	if (wikiBrowserHost.width() > 1200) {
+		offsetDelta -= 600;
+	}
+	wikiBrowserHost.animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 }
