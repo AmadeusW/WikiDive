@@ -9,15 +9,22 @@
 	right: 0;
 	bottom: 0;
 	white-space: nowrap;
+	display: flex;
+	flex-direction: row;
 }
 
 .wikibrowser-page-host {
 	position: relative;
 	width: 600px;
 	height: 100%;
-	display: inline-block; /* So that they are positioned side by side */
 	white-space: normal;
-	padding-right: 30px;
+	padding-right: 30px;	
+	/* as flex child: */
+	flex-shrink: 0;
+	flex-grow: 0;
+	/* as flex parent: */
+	display: flex;
+	flex-direction: column;
 }
 
 .wikibrowser-page-host:after {
@@ -38,11 +45,22 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a63f2828', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
 }
 
+.wikibrowser-page-header {
+	border-bottom: 1px solid #E2E3E4;
+	margin: 0 3.35em;
+	padding-top: 1em;
+}
+
+.wikibrowser-page-header h2 {
+	font-family: "Linux Libertine",Georgia,Times,serif;
+}
+
 .wikibrowser-page {
-	height: 100%;
+	flex: 1;
+	overflow-y: hidden;
 	/* Requirements for perfect-scrollbar: */
 	position: relative;
-	overflow: hidden;
+	/* overflow: hidden;*/
 }
 
 /* Header: */
