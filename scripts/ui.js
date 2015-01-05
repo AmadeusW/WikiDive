@@ -12,14 +12,14 @@ $( document ).ready(function() {
 	movingTooltipFinalContent = $('#visible-tooltip span');
 	movingTooltipTempContent = $('#hidden-tooltip span');
 	movingTooltipPointer = $('#tooltip-pointer');
-	header = $('.wikibrowser-header'); // TODO: make it an ID
+	header = $('#wikibrowser-header');
 	articleIconsHost = $('#wikibrowser-article-icons');
-	wikiBrowserHost = $('.wikibrowser-host'); // TODO: make it an ID
+	wikiBrowserHost = $('#wikibrowser-host');
 	setUpInitialMouseEvents();
 });
 
 function setUpInitialMouseEvents() {
-	var elements = $(".wikibrowser-header .header-element");
+	var elements = $("#wikibrowser-header .header-element");
 	$.each(elements, function(index, element) {
 		setUpMouseEvents($(element));
 	});

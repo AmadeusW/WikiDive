@@ -19,7 +19,7 @@ function createColumnAfter(previousPage, pageId) {
 
 	// Add page to the end of wikibrowser-host's children, or after specified element
 	if (typeof previousPage === 'undefined') {
-		$(".wikibrowser-host").append(tempContainer.innerHtml);
+		$("#wikibrowser-host").append(tempContainer.innerHtml);
 	}
 	else {
 		previousPage.after(tempContainer.innerHtml);
@@ -201,7 +201,7 @@ function resetSearch() {
 	$('.wikibrowser-search-results').hide();
 	$('#searchPage input').val("");
 	// Moves the #searchPageHost to the far right.
-	$(".wikibrowser-host").append($("#searchPageHost"));
+	$("#wikibrowser-host").append($("#searchPageHost"));
 }
 
 function isArticleLoaded(articleName) {
