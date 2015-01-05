@@ -110,6 +110,7 @@
 }
 
 .wikibrowser-header .header-element {
+	cursor: pointer;
 	display: block;
 	float: left;
 	padding: 12px 1em 0 1em;
