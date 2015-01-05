@@ -4,7 +4,7 @@ $( document ).ready(function() {
   setUpSearch();
 });
 
-function addPage(previousPage) {
+function createColumnAfter(previousPage) {
 	var pageId = "page" + pageIndex++;
 
 	var tempContainer = document.createElement("div");
@@ -98,7 +98,7 @@ function fixHyperlink(index, element)
 		{
 			jElement.on('click', function() {
 				var parentPageHost = jElement.closest('.wikibrowser-page-host');
-				loadPageIntoElement(address.substring(6), addPage(parentPageHost));
+				loadPageIntoElement(address.substring(6), createColumnAfter(parentPageHost));
 				return false; // prevent going to href (wikipedia)
 			});
 		}
@@ -107,7 +107,7 @@ function fixHyperlink(index, element)
 		jElement.attr('href', "http://en.wikipedia.org" + address);
 		jElement.on('click', function() {
 			var parentPageHost = jElement.closest('.wikibrowser-page-host');
-			loadPageIntoElement(address.substring(19), addPage(parentPageHost));
+			loadPageIntoElement(address.substring(19), createColumnAfter(parentPageHost));
 			return false; // prevent going to href (wikipedia)
 		})
 	}
@@ -121,7 +121,7 @@ function goToArticle(query) {
 	results = getSearchResults(query, function(results) {
 		if (verifyResults(query, results)) {
 			var bestMatch = results.query.search[0];
-			loadPageIntoElement(bestMatch.title, addPage($('#searchPageHost')));
+			loadPageIntoElement(bestMatch.title, createColumnAfter($('#searchPageHost')));
 		}
 	});
 }
@@ -174,7 +174,7 @@ function verifyResults(query, results) {
 function loadArticle(articleName) {
 	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
 	return function() {
-		loadPageIntoElement(articleName, addPage($('#searchPageHost')));
+		loadPageIntoElement(articleName, createColumnAfter($('#searchPageHost')));
 	};
 }
 
