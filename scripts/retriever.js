@@ -136,7 +136,7 @@ function searchArticle(query) {
 				var resultItem = document.createElement("li");
 				var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
 				$(resultItem).html(displayTitle);
-				$(resultItem).on('click', loadArticle(results.query.search[index].title));
+				$(resultItem).on('click', loadArticleHandler(results.query.search[index].title));
 				$('.wikibrowser-search-results').append(resultItem);
 			}
 			/* If not visible, reveal the results */
@@ -171,7 +171,7 @@ function verifyResults(query, results) {
 	}
 }
 
-function loadArticle(articleName) {
+function loadArticleHandler(articleName) {
 	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
 	return function() {
 		loadPageIntoElement(articleName, createColumnAfter($('#searchPageHost')));
