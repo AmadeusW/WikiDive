@@ -1,4 +1,5 @@
 var pageIndex = 0;
+var articleTable = [];
 
 $( document ).ready(function() {
   setUpSearch();
@@ -98,7 +99,7 @@ function fixHyperlink(index, element)
 		{
 			jElement.on('click', function() {
 				var parentPageHost = jElement.closest('.wikibrowser-page-host');
-				loadPageIntoElement(address.substring(6), createColumnAfter(parentPageHost));
+				loadArticle(address.substring(6), parentPageHost);
 				return false; // prevent going to href (wikipedia)
 			});
 		}
@@ -107,7 +108,7 @@ function fixHyperlink(index, element)
 		jElement.attr('href', "http://en.wikipedia.org" + address);
 		jElement.on('click', function() {
 			var parentPageHost = jElement.closest('.wikibrowser-page-host');
-			loadPageIntoElement(address.substring(19), createColumnAfter(parentPageHost));
+			loadArticle(address.substring(19), parentPageHost);
 			return false; // prevent going to href (wikipedia)
 		})
 	}
@@ -121,7 +122,7 @@ function goToArticle(query) {
 	results = getSearchResults(query, function(results) {
 		if (verifyResults(query, results)) {
 			var bestMatch = results.query.search[0];
-			loadPageIntoElement(bestMatch.title, createColumnAfter($('#searchPageHost')));
+			loadArticle(bestMatch.title, $('#searchPageHost'));
 		}
 	});
 }
@@ -171,11 +172,27 @@ function verifyResults(query, results) {
 	}
 }
 
+/**
+ * Handler that calls loadArticle and places the new function after the search results.
+ * @param {string} articleName - title of the Wikipedia article to load
+ */
 function loadArticleHandler(articleName) {
 	// See https://stackoverflow.com/questions/9638361/how-can-i-pass-a-parameter-to-a-function-without-it-running-right-away
 	return function() {
-		loadPageIntoElement(articleName, createColumnAfter($('#searchPageHost')));
+		loadArticle(articleName, $('#searchPageHost'));
 	};
+}
+
+/**
+ * Check if article has been loaded. If not, loads the article and places it after specified article
+ * @param {string} articleName - title of the Wikipedia article to load
+ * @param {string} loadLocation - ID of element after which the article will be rendered.
+ */
+function loadArticle(articleName, previousElement) {
+	if (!isArticleLoaded(articleName)) {
+		articleTable.push(articleName);
+		loadPageIntoElement(articleName, createColumnAfter(previousElement));
+	}
 }
 
 function getSearchResults(query, callback) {
@@ -196,4 +213,8 @@ function resetSearch() {
 	$('#searchPage input').val("");
 	// Moves the #searchPageHost to the far right.
 	$(".wikibrowser-host").append($("#searchPageHost"));
+}
+
+function isArticleLoaded(articleName) {
+	return articleTable.indexOf(articleName) > -1;
 }
