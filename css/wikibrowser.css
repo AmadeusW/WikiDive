@@ -132,11 +132,11 @@
 #wikibrowser-header #moving-tooltip {
 	position: absolute;
 	top: 46px;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(30, 30, 30, 0.7);
 	color: #fff;
 	z-index: 10;
 	border-radius: 5px;
-	padding: 4px 0; /* horizontal padding is added to directly containing span */
+	padding: 3px 0 2px 0; /* horizontal padding is added to directly containing span */
 	margin: 0 1em;
 	left: 100px; /* initially. Changed by the animation */
 	opacity: 0; /* initially. Changed by the animation */
@@ -154,7 +154,7 @@
 	width: 0;
 	border-left: 6px solid transparent;
 	border-right: 6px solid transparent;
-	border-bottom: 6px solid rgba(0, 0, 0, 0.5);
+	border-bottom: 6px solid rgba(30, 30, 30, 0.7);
 }
 
 #wikibrowser-header #moving-tooltip #visible-tooltip {
