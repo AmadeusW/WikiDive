@@ -121,7 +121,6 @@ function goToArticle(query) {
 	results = getSearchResults(query, function(results) {
 		if (verifyResults(query, results)) {
 			var bestMatch = results.query.search[0];
-			loadArticle(bestMatch.title);
 			loadPageIntoElement(bestMatch.title, addPage($('#searchPageHost')));
 		}
 	});
