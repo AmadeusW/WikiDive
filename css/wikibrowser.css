@@ -57,10 +57,9 @@
 
 .wikibrowser-page {
 	flex: 1;
-	overflow-y: hidden;
 	/* Requirements for perfect-scrollbar: */
+	overflow: hidden;
 	position: relative;
-	/* overflow: hidden;*/
 }
 
 /* Header: */
