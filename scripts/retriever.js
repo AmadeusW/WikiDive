@@ -5,9 +5,7 @@ $( document ).ready(function() {
   setUpSearch();
 });
 
-function createColumnAfter(previousPage) {
-	var pageId = "page" + pageIndex++;
-
+function createColumnAfter(previousPage, pageId) {
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
 '			<div class="wikibrowser-page-host wikibrowser-page-shadow" id="' + pageId + '">' +
@@ -30,14 +28,7 @@ function createColumnAfter(previousPage) {
 	// Move the search page to the very right. Do it before we calculate where to scroll.
 	resetSearch();
 
-	// Scroll to reveal the new pane
-	var newPageOffset = $("#" + pageId).offset().left;
-	var offsetDelta = $(".wikibrowser-host").scrollLeft();
-	// Subtract 600 to also show page to the left, if the view area is large enough
-	if ($(".wikibrowser-host").width() > 1200) {
-		offsetDelta -= 600;
-	}
-	$(".wikibrowser-host").animate({scrollLeft: offsetDelta + newPageOffset}, 400);
+	scrollToPageId(pageId);
 
 	return pageId;
 }
@@ -190,9 +181,10 @@ function loadArticleHandler(articleName) {
  */
 function loadArticle(articleName, previousElement) {
 	if (!isArticleLoaded(articleName)) {
-		articleTable.push(articleName);
-		createHeaderElementForArticle(articleName);
-		loadPageIntoElement(articleName, createColumnAfter(previousElement));
+		var pageId = "page" + pageIndex++;
+		articleTable[articleName] = pageId;
+		createHeaderElementForArticle(articleName, pageId);
+		loadPageIntoElement(articleName, createColumnAfter(previousElement, pageId));
 	}
 }
 
