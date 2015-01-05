@@ -72,7 +72,6 @@ function headerElementMouseEnter() {
 	var elementWidth = jElement.outerWidth(false);
 	var tooltipWidth = movingTooltipTempContent.outerWidth(true);
 	var screenWidth = header.width();
-	//console.log(elementPosition +", "+ elementWidth +", "+ tooltipWidth+", "+ screenWidth);
 	
 	var targetPosition = elementPosition + elementWidth * 0.5 - 6;
 	var tooltipOffset = targetPosition - tooltipWidth * 0.5 - 10;
