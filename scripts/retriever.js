@@ -191,6 +191,7 @@ function loadArticleHandler(articleName) {
 function loadArticle(articleName, previousElement) {
 	if (!isArticleLoaded(articleName)) {
 		articleTable.push(articleName);
+		createHeaderElementForArticle(articleName);
 		loadPageIntoElement(articleName, createColumnAfter(previousElement));
 	}
 }

@@ -12,6 +12,7 @@ $( document ).ready(function() {
 	movingTooltipTempContent = $('#hidden-tooltip span');
 	movingTooltipPointer = $('#tooltip-pointer');
 	header = $('.wikibrowser-header'); // TODO: make it an ID
+	articleIconsHost = $('#wikibrowser-article-icons');
 	setUpTooltips();
 });
 
@@ -24,6 +25,33 @@ function setUpTooltips() {
 
 function setUpTooltip(jElement) {
 	jElement.hover(headerElementMouseEnter, headerElementMouseLeave);
+}
+
+function createHeaderElementForArticle(articleName) {
+	// '_' -> ' ' for nice tooltip and simpler regex
+	articleName = articleName.replace(/_/g, " ");
+	// Remove &redirect=no
+	if (articleName.indexOf('&') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('&'));
+	}
+	// Remove #anchor
+	if (articleName.indexOf('#') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('#'));
+	}	
+	console.log("Hello and welcome: " + articleName);
+	var $element = $("<a>", {
+		target: "_blank",
+		class: "header-element",
+		alt: articleName
+	})
+	// Capture first letters of words
+	var acronym = articleName.match(/\b([a-zA-Z])/g).join(''); 
+	// Limit length of the acronym
+	acronym = acronym.substring(0, 6);
+	console.log("You shall be named: " + acronym);
+	$element.html(acronym);
+	setUpTooltip($element);
+	articleIconsHost.append($element);
 }
 
 function headerElementMouseEnter() {
