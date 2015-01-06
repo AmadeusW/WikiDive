@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 
 	<title>Wiki Browser</title>
-	<meta name="description" content="Explore Wikipedia article by article.">
+	<meta name="description" content="Click through Wikipedia articles and satisfy your couriosity.">
 	<meta name="author" content="Amadeus Wieczorek">
 
 	<link rel="stylesheet" href="css/wikibrowser.css?v=1.0">
@@ -17,9 +17,9 @@
 </head>
 <body>
 
-	<header class="wikibrowser-header">
+	<header id="wikibrowser-header">
 		<h1>
-			WikiBrowser
+			WikiDive
 		</h1>
 		<div class="article-icons" id="wikibrowser-article-icons">
 		
@@ -32,22 +32,22 @@
 
 		<!--<span class="divider"></span>-->
 		<div class="right-align">
-			<a href="http://github.com/AmadeusW/WikiBrowser" target="_blank" class="header-element" alt="WikiBrowser on GitHub"><span class="github-icon"></span></a>
+			<a href="http://github.com/AmadeusW/WikiBrowser" target="_blank" class="header-element" alt="WikiDive on GitHub"><span class="github-icon"></span></a>
 			<a href="http://codeconnect.io/" target="_blank" class="header-element" alt="Inspired by Code Connect"><img class="codeconnect-icon" src="content/codeconnect.ico" /></a>
 		</div>
 		<div id="moving-tooltip">
 			<div id="visible-tooltip">
-				<span>WikiBrowser</span>
+				<span>WikiDive</span>
 			</div>
 			<div id="hidden-tooltip">
-				<span>WikiBrowser</span>
+				<span>WikiDive</span>
 			</div>
 		</div>
 		<div id="tooltip-pointer"></div>
 	</header>
 	
 	<div class="mediawiki ltr sitedir-ltr stable mw-mobile-mode skin-minerva action-view">
-		<div class="wikibrowser-host">
+		<div id="wikibrowser-host">
 			<div class="wikibrowser-page-host" id="searchPageHost">
 				<div class="wikibrowser-page ps-container ps-active-y" id="searchPage">
 					<div class="wikibrowser-search-content">

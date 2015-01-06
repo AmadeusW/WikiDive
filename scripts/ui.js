@@ -12,14 +12,14 @@ $( document ).ready(function() {
 	movingTooltipFinalContent = $('#visible-tooltip span');
 	movingTooltipTempContent = $('#hidden-tooltip span');
 	movingTooltipPointer = $('#tooltip-pointer');
-	header = $('.wikibrowser-header'); // TODO: make it an ID
+	header = $('#wikibrowser-header');
 	articleIconsHost = $('#wikibrowser-article-icons');
-	wikiBrowserHost = $('.wikibrowser-host'); // TODO: make it an ID
+	wikiBrowserHost = $('#wikibrowser-host');
 	setUpInitialMouseEvents();
 });
 
 function setUpInitialMouseEvents() {
-	var elements = $(".wikibrowser-header .header-element");
+	var elements = $("#wikibrowser-header .header-element");
 	$.each(elements, function(index, element) {
 		setUpMouseEvents($(element));
 	});
@@ -72,7 +72,6 @@ function headerElementMouseEnter() {
 	var elementWidth = jElement.outerWidth(false);
 	var tooltipWidth = movingTooltipTempContent.outerWidth(true);
 	var screenWidth = header.width();
-	//console.log(elementPosition +", "+ elementWidth +", "+ tooltipWidth+", "+ screenWidth);
 	
 	var targetPosition = elementPosition + elementWidth * 0.5 - 6;
 	var tooltipOffset = targetPosition - tooltipWidth * 0.5 - 10;

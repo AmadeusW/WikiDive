@@ -1,6 +1,6 @@
 /* Core: */
 
-.wikibrowser-host {
+#wikibrowser-host {
 	overflow-x: scroll;
 	overflow-y: hidden;
 	position: fixed;
@@ -64,7 +64,7 @@
 
 /* Header: */
 
-.wikibrowser-header {
+#wikibrowser-header {
 	border-bottom: 1px solid #CCC;
 	position: fixed;
 	top: 0;
@@ -77,39 +77,39 @@
 	font-family: Georgia, Times, 'Times New Roman', serif;	
 }
 
-.wikibrowser-header a, .wikibrowser-header a:hover, .wikibrowser-header a:visited {
+#wikibrowser-header a, #wikibrowser-header a:hover, #wikibrowser-header a:visited {
 	color: #300;
 }
 
-.wikibrowser-header h1 {
+#wikibrowser-header h1 {
 	font-variant: small-caps;
 	font-size: 26px;
-	margin-left: 53px;
+	margin-left: 55px;
 	margin-right: 1em;
 	padding-top: 3px;
 	display: inline-block;
 	float: left;
 }
 
-.wikibrowser-header .article-icons {
+#wikibrowser-header .article-icons {
 	float: left;
 }
 
-.wikibrowser-header .extra-icons {
+#wikibrowser-header .extra-icons {
 	float: left;
 }
 
-.wikibrowser-header .right-align {
+#wikibrowser-header .right-align {
 	float: right;
-	margin-right: 53px;
+	margin-right: 55px;
 }
 
-.wikibrowser-header .divider {
+#wikibrowser-header .divider {
 	padding-left: 1em;
 	padding-right: 1em;
 }
 
-.wikibrowser-header .header-element {
+#wikibrowser-header .header-element {
 	cursor: pointer;
 	display: block;
 	float: left;
@@ -122,27 +122,27 @@
 	border-right: 1px solid #eee;
 }
 
-.wikibrowser-header .header-element:hover {
+#wikibrowser-header .header-element:hover {
 	background-color: #fff;
 	text-decoration: none;
 	border-right: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 }
 
-.wikibrowser-header #moving-tooltip {
+#wikibrowser-header #moving-tooltip {
 	position: absolute;
 	top: 46px;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(30, 30, 30, 0.7);
 	color: #fff;
 	z-index: 10;
 	border-radius: 5px;
-	padding: 4px 0; /* horizontal padding is added to directly containing span */
+	padding: 3px 0 2px 0; /* horizontal padding is added to directly containing span */
 	margin: 0 1em;
 	left: 100px; /* initially. Changed by the animation */
 	opacity: 0; /* initially. Changed by the animation */
 }
 
-.wikibrowser-header #tooltip-pointer {
+#wikibrowser-header #tooltip-pointer {
 	position: absolute;
 	top: 40px;
 	left: 150px; /* initially. Changed by the animation */
@@ -154,27 +154,27 @@
 	width: 0;
 	border-left: 6px solid transparent;
 	border-right: 6px solid transparent;
-	border-bottom: 6px solid rgba(0, 0, 0, 0.5);
+	border-bottom: 6px solid rgba(30, 30, 30, 0.7);
 }
 
-.wikibrowser-header #moving-tooltip #visible-tooltip {
+#wikibrowser-header #moving-tooltip #visible-tooltip {
 	white-space: nowrap;
 	position: relative;
 }
 
-.wikibrowser-header #moving-tooltip #visible-tooltip span {
+#wikibrowser-header #moving-tooltip #visible-tooltip span {
 	opacity: 0; /* initially. Changed by the animation */
 }
 
 /* This element is used to measure the tooltip's width */
-.wikibrowser-header #moving-tooltip #hidden-tooltip {
+#wikibrowser-header #moving-tooltip #hidden-tooltip {
 	white-space: nowrap;
 	opacity: 0;
 	position: relative;
 	margin-top: -1.4em;
 }
 
-.wikibrowser-header #moving-tooltip div span {
+#wikibrowser-header #moving-tooltip div span {
 	padding: 0 1em;
 }
 
@@ -211,7 +211,7 @@
 /* Search column: */
 
 .wikibrowser-search-content {
-	margin: 50px 0 0 30px;
+	margin: 50px 0 0 55px;
 }
 
 .wikibrowser-search-content input {

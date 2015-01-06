@@ -19,7 +19,7 @@ function createColumnAfter(previousPage, pageId) {
 
 	// Add page to the end of wikibrowser-host's children, or after specified element
 	if (typeof previousPage === 'undefined') {
-		$(".wikibrowser-host").append(tempContainer.innerHtml);
+		$("#wikibrowser-host").append(tempContainer.innerHtml);
 	}
 	else {
 		previousPage.after(tempContainer.innerHtml);
@@ -142,14 +142,10 @@ function verifyResults(query, results) {
 	if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
 	{
 		$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
-		console.log("WTF1");
 		if (typeof results.query.searchinfo.suggestion !== 'undefined') {
-			console.log("WTF2");
 			$('.wikibrowser-search-results-title').append(' <br />Did you mean <a class="wikibrowser-search-suggestion">' + results.query.searchinfo.suggestion + '</a>?');
 			// When user clicks on the suggestion, we're automatically searching:
-			console.log("Registering suggestion " + results.query.searchinfo.suggestion);
 			$('.wikibrowser-search-results-title .wikibrowser-search-suggestion').on('click', function() {
-				console.log("Clicked on suggestion " + results.query.searchinfo.suggestion);
 				$('#searchPage input').val(results.query.searchinfo.suggestion);
 				searchArticle(results.query.searchinfo.suggestion);
 			})
@@ -205,7 +201,7 @@ function resetSearch() {
 	$('.wikibrowser-search-results').hide();
 	$('#searchPage input').val("");
 	// Moves the #searchPageHost to the far right.
-	$(".wikibrowser-host").append($("#searchPageHost"));
+	$("#wikibrowser-host").append($("#searchPageHost"));
 }
 
 function isArticleLoaded(articleName) {
