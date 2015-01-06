@@ -92,7 +92,8 @@ function headerElementMouseEnter() {
 
 	$movingTooltip.stop().animate(
 		{
-			opacity: 1
+			opacity: 1,
+			height: 27
 		},
 		{
 			duration: 200,
@@ -155,7 +156,8 @@ function headerElementMouseLeave() {
 	if (hoveredElements == 0) {
 		$movingTooltip.stop().animate(
 			{
-				opacity: 0
+				opacity: 0,
+				height: 0
 			},
 			{
  				duration: 200,

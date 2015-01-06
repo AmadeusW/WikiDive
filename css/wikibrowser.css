@@ -78,8 +78,8 @@
 
 .wikibrowser-page-header-buttons {
 	position: absolute;
-	top: 3px;
-	right: 3px;
+	top: 5px;
+	right: 0;
 	font-family: "Garamond", Georgia, Times, serif;	
 }
 
@@ -189,6 +189,7 @@
 #wikibrowser-header #moving-tooltip {
 	position: absolute;
 	top: 46px;
+	height: 27px; /* a value the tooltip goes back to after being folded (to preven obstructing the buttons while hidden) */
 	background-color: rgba(30, 30, 30, 0.7);
 	color: #fff;
 	z-index: 10;
