@@ -5,7 +5,7 @@ $( document ).ready(function() {
   setUpSearch();
 });
 
-function createColumnAfter(previousPage, pageId) {
+function createColumnAfter($previousPage, pageId) {
 	var tempContainer = document.createElement("div");
 	tempContainer.innerHtml = 
 '			<div class="wikibrowser-page-host wikibrowser-page-shadow" id="' + pageId + '">' +
@@ -22,7 +22,7 @@ function createColumnAfter(previousPage, pageId) {
 		$("#wikibrowser-host").append(tempContainer.innerHtml);
 	}
 	else {
-		previousPage.after(tempContainer.innerHtml);
+		$previousPage.after(tempContainer.innerHtml);
 	}
 
 	// Move the search page to the very right. Do it before we calculate where to scroll.
@@ -51,6 +51,14 @@ function setUpSearch() {
 	$( "#searchPage" ).perfectScrollbar({
 		wheelSpeed: 3
 	});	
+
+	var surpriseButton = $(".wikibrowser-surprise-button");
+	surpriseButton.on('click', function() {
+		goToArticle("Frieze");
+		$("#wikibrowser-intro").delay(2000).hide(200);
+	});
+	// This is desired to happen only once
+	$("#wikibrowser-intro").delay(700).show(300);
 }
 
 function loadPageIntoElement(page, element) {
@@ -81,31 +89,31 @@ function loadPageIntoElement(page, element) {
 
 function fixHyperlink(index, element)
 {
-	var jElement = $(element);
-	var address = jElement.attr('href');
+	var $element = $(element);
+	var address = $element.attr('href');
 	if (address.substring(0, 6) === '/wiki/')
 	{
-		jElement.attr('href', "http://en.wikipedia.org" + address);
+		$element.attr('href', "http://en.wikipedia.org" + address);
 		if (address.substring(0, 11) !== '/wiki/File:')
 		{
-			jElement.on('click', function() {
-				var parentPageHost = jElement.closest('.wikibrowser-page-host');
-				loadArticle(address.substring(6), parentPageHost);
+			$element.on('click', function() {
+				var $parentPageHost = $element.closest('.wikibrowser-page-host');
+				loadArticle(address.substring(6), $parentPageHost);
 				return false; // prevent going to href (wikipedia)
 			});
 		}
 	}
 	if (address.substring(0, 19) === '/w/index.php?title=') {
-		jElement.attr('href', "http://en.wikipedia.org" + address);
-		jElement.on('click', function() {
-			var parentPageHost = jElement.closest('.wikibrowser-page-host');
-			loadArticle(address.substring(19), parentPageHost);
+		$element.attr('href', "http://en.wikipedia.org" + address);
+		$element.on('click', function() {
+			var $parentPageHost = $element.closest('.wikibrowser-page-host');
+			loadArticle(address.substring(19), $parentPageHost);
 			return false; // prevent going to href (wikipedia)
 		})
 	}
 	if (address.substring(0, 1) !== '#')
 	{
-		jElement.attr('target', "_blank");
+		$element.attr('target', "_blank");
 	}
 }
 
@@ -122,8 +130,8 @@ function searchArticle(query) {
 	var results = getSearchResults(query, function(results) {
 		if (verifyResults(query, results)) {
 			$('.wikibrowser-search-results-title').html('Search results for <em>' + query + '</em>:');
-			/* Remove existing results */
-			$('.wikibrowser-search-results').html("");
+			$('.wikibrowser-search-results').html(""); // Remove existing results
+
 			for (var index in results.query.search) {
 				var resultItem = document.createElement("li");
 				var displayTitle = results.query.search[index].titlesnippet !== "" ? results.query.search[index].titlesnippet : results.query.search[index].title;
@@ -139,8 +147,7 @@ function searchArticle(query) {
 }
 
 function verifyResults(query, results) {
-	if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0)
-	{
+	if (typeof results.query.search === 'undefined' || results.query.searchinfo.totalhits === 0) {
 		$('.wikibrowser-search-results-title').html('There are no search results for <em>' + query + '</em>.');
 		if (typeof results.query.searchinfo.suggestion !== 'undefined') {
 			$('.wikibrowser-search-results-title').append(' <br />Did you mean <a class="wikibrowser-search-suggestion">' + results.query.searchinfo.suggestion + '</a>?');
@@ -175,12 +182,12 @@ function loadArticleHandler(articleName) {
  * @param {string} articleName - title of the Wikipedia article to load
  * @param {string} loadLocation - ID of element after which the article will be rendered.
  */
-function loadArticle(articleName, previousElement) {
+function loadArticle(articleName, $previousElement) {
 	if (!isArticleLoaded(articleName)) {
 		var pageId = "page" + pageIndex++;
 		articleTable[articleName] = pageId;
 		createHeaderElementForArticle(articleName, pageId);
-		loadPageIntoElement(articleName, createColumnAfter(previousElement, pageId));
+		loadPageIntoElement(articleName, createColumnAfter($previousElement, pageId));
 	}
 }
 
