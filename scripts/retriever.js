@@ -186,7 +186,7 @@ function loadArticle(articleName, $previousElement) {
 	if (!isArticleLoaded(articleName)) {
 		var pageId = "page" + pageIndex++;
 		articleTable[articleName] = pageId;
-		createHeaderElementForArticle(articleName, pageId);
+		createHeaderElementForArticle(articleName, pageId, $previousElement);
 		loadPageIntoElement(articleName, createColumnAfter($previousElement, pageId));
 	}
 }
