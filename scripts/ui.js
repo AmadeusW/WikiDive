@@ -31,14 +31,7 @@ function setUpMouseEvents($element) {
 }
 
 function createHeaderElementForArticle(articleName, pageID, $previousPage) {
-	// Remove &redirect=no
-	if (articleName.indexOf('&') > -1) {
-		articleName = articleName.substring(0, articleName.indexOf('&'));
-	}
-	// Remove #anchor
-	if (articleName.indexOf('#') > -1) {
-		articleName = articleName.substring(0, articleName.indexOf('#'));
-	}	
+
 	// '_' -> ' ' for nice tooltip and simpler regex
 	articleName = articleName.replace(/_/g, " ");	
 
@@ -60,15 +53,12 @@ function createHeaderElementForArticle(articleName, pageID, $previousPage) {
 
 	// Place the header element either at the end of the list,
 	// or after the specified element (if it's valid)
-	console.log($previousPage);
 	if (typeof $previousPage === 'undefined' || $previousPage.attr('id') === 'searchPageHost') {
 		$articleIconsHost.append($element);
 	}
 	else {
 		var previousPageID = $previousPage.attr('id');
-		console.log(previousPageID);
 		$previousButton = $('#nav_' + previousPageID);
-		console.log($previousButton);
 		$previousButton.after($element);
 	}	
 }

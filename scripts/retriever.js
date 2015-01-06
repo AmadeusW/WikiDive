@@ -183,6 +183,18 @@ function loadArticleHandler(articleName) {
  * @param {string} loadLocation - ID of element after which the article will be rendered.
  */
 function loadArticle(articleName, $previousElement) {
+	// Fix up the articleName
+	// Remove &redirect=no
+	if (articleName.indexOf('&') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('&'));
+	}
+	// Remove #anchor
+	if (articleName.indexOf('#') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('#'));
+	}
+	// ' ' -> '_' for uniform naming (articles from search results have spaces, others have underscores)
+	articleName = articleName.replace(/ /g, "_");		
+
 	if (!isArticleLoaded(articleName)) {
 		var pageId = "page" + pageIndex++;
 		articleTable[articleName] = pageId;
