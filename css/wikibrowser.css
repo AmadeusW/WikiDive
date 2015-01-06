@@ -84,7 +84,7 @@
 #wikibrowser-header h1 {
 	font-variant: small-caps;
 	font-size: 26px;
-	margin-left: 53px;
+	margin-left: 55px;
 	margin-right: 1em;
 	padding-top: 3px;
 	display: inline-block;
@@ -101,7 +101,7 @@
 
 #wikibrowser-header .right-align {
 	float: right;
-	margin-right: 53px;
+	margin-right: 55px;
 }
 
 #wikibrowser-header .divider {
@@ -211,7 +211,7 @@
 /* Search column: */
 
 .wikibrowser-search-content {
-	margin: 50px 0 0 30px;
+	margin: 50px 0 0 55px;
 }
 
 .wikibrowser-search-content input {
