@@ -64,7 +64,7 @@ function setUpSearch() {
 
 function loadPageIntoElement(page, element) {
 	$.ajax({
-	    url : "http://en.wikipedia.org/w/api.php?action=parse&format=json&callback=?&continue=&page=" + page,
+	    url : "//en.wikipedia.org/w/api.php?action=parse&format=json&callback=?&continue=&page=" + page,
 	    data: {
 	    	format: 'json'
 	    },
@@ -86,7 +86,7 @@ function loadPageIntoElement(page, element) {
 			});
 			$("#" + element + " > .wikibrowser-page-header .button-wiki").show().attr({
 				target: '_blank',
-				href: 'http://en.wikipedia.org/wiki/' + page
+				href: '//en.wikipedia.org/wiki/' + page
 			});
 		}
 		$("#" + element + " > .wikibrowser-page-header .button-close").show().on('click', function() {
@@ -102,7 +102,7 @@ function fixHyperlink(index, element)
 	var address = $element.attr('href');
 	if (address.substring(0, 6) === '/wiki/')
 	{
-		$element.attr('href', "http://en.wikipedia.org" + address);
+		$element.attr('href', "//en.wikipedia.org" + address);
 		if (address.substring(0, 11) !== '/wiki/File:')
 		{
 			$element.on('click', function() {
@@ -113,7 +113,7 @@ function fixHyperlink(index, element)
 		}
 	}
 	if (address.substring(0, 19) === '/w/index.php?title=') {
-		$element.attr('href', "http://en.wikipedia.org" + address);
+		$element.attr('href', "//en.wikipedia.org" + address);
 		$element.on('click', function() {
 			var $parentPageHost = $element.closest('.wikibrowser-page-host');
 			loadArticle(address.substring(19), $parentPageHost);
@@ -215,7 +215,7 @@ function loadArticle(articleName, $previousElement) {
 function getSearchResults(query, callback) {
 	// See: http://www.mediawiki.org/wiki/API:Search
 	$.ajax({
-	    url : "http://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=7&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
+	    url : "//en.wikipedia.org/w/api.php?action=query&list=search&srlimit=7&srprop=titlesnippet|redirecttitle&format=json&callback=?&continue=&srsearch=" + query,
 	    data: {
 	    	format: 'json'
 	    },
