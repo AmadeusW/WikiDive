@@ -69,10 +69,40 @@
 	border-bottom: 1px solid #E2E3E4;
 	margin: 0 3.35em;
 	padding-top: 1em;
+	position: relative;
 }
 
 .wikibrowser-page-header h2 {
 	font-family: "Linux Libertine",Georgia,Times,serif;
+}
+
+.wikibrowser-page-header-buttons {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	font-family: "Garamond", Georgia, Times, serif;	
+}
+
+.wikibrowser-page-header-buttons a {
+	cursor: pointer;
+	color: inherit;
+	padding: 2px 5px;
+	text-decoration: none;
+	color: #300;
+	background-color: #eee;
+	display: none; /* Initially */
+}
+
+.wikibrowser-page-header-buttons .button-wiki:hover {
+	background-color: #00d;
+	color: #fff;
+	text-decoration: none;
+}
+
+.wikibrowser-page-header-buttons .button-close:hover {
+	background-color: #c00;
+	color: #fff;
+	text-decoration: none;
 }
 
 .wikibrowser-page {

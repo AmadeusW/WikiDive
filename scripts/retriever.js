@@ -10,6 +10,7 @@ function createColumnAfter($previousPage, pageId) {
 	tempContainer.innerHtml = 
 '			<div class="wikibrowser-page-host wikibrowser-page-shadow" id="' + pageId + '">' +
 '				<div class="wikibrowser-page-header">' +
+'					<div class="wikibrowser-page-header-buttons"><a class="button-wiki" title="View on Wikipedia">W</a><a class="button-close" title="Close this article">☓</a></div>' +
 '					<h2></h2>' +
 '				</div>'+
 '				<div class="wikibrowser-page ps-container ps-active-y">'+
@@ -83,7 +84,15 @@ function loadPageIntoElement(page, element) {
 			$( "#" + element + " .wikibrowser-page").perfectScrollbar({
 				wheelSpeed: 3
 			});
+			$("#" + element + " > .wikibrowser-page-header .button-wiki").show().attr({
+				target: '_blank',
+				href: 'http://en.wikipedia.org/wiki/' + page
+			});
 		}
+		$("#" + element + " > .wikibrowser-page-header .button-close").show().on('click', function() {
+			$( "#" + element ).remove();
+			$( "#nav_" + element ).remove();
+		});
 	});  
 }
 
