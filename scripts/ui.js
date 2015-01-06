@@ -189,11 +189,13 @@ function headerElementClick() {
 }
 
 function scrollToPageId(pageId) {
-	var newPageOffset = $("#" + pageId).offset().left;
+	var targetPageOffset = $("#" + pageId).offset().left;
 	var offsetDelta = $wikiBrowserHost.scrollLeft();
-	// Subtract 600 to also show page to the left, if the view area is large enough
-	if ($wikiBrowserHost.width() > 1200) {
-		offsetDelta -= 600;
+	// Center the target page
+	var freeSpace = $wikiBrowserHost.width() - 600;
+	if (freeSpace > 0) {
+
+		offsetDelta -= freeSpace * 0.5;
 	}
-	$wikiBrowserHost.animate({scrollLeft: offsetDelta + newPageOffset}, 400);
+	$wikiBrowserHost.animate({scrollLeft: offsetDelta + targetPageOffset}, 400);
 }
