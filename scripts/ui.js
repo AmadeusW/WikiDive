@@ -1,33 +1,33 @@
-var movingTooltip;
-var movingTooltipPointer;
-var movingTooltipFinalContent;
-var movingTooltipTempContent;
-var header;
-var articleIconsHost;
-var wikiBrowserHost;
+var $movingTooltip;
+var $movingTooltipPointer;
+var $movingTooltipFinalContent;
+var $movingTooltipTempContent;
+var $header;
+var $articleIconsHost;
+var $wikiBrowserHost;
 var hoveredElements = 0;
 
 $( document ).ready(function() {
-	movingTooltip = $('#moving-tooltip');
-	movingTooltipFinalContent = $('#visible-tooltip span');
-	movingTooltipTempContent = $('#hidden-tooltip span');
-	movingTooltipPointer = $('#tooltip-pointer');
-	header = $('#wikibrowser-header');
-	articleIconsHost = $('#wikibrowser-article-icons');
-	wikiBrowserHost = $('#wikibrowser-host');
+	$movingTooltip = $('#moving-tooltip');
+	$movingTooltipFinalContent = $('#visible-tooltip span');
+	$movingTooltipTempContent = $('#hidden-tooltip span');
+	$movingTooltipPointer = $('#tooltip-pointer');
+	$header = $('#wikibrowser-header');
+	$articleIconsHost = $('#wikibrowser-article-icons');
+	$wikiBrowserHost = $('#wikibrowser-host');
 	setUpInitialMouseEvents();
 });
 
 function setUpInitialMouseEvents() {
-	var elements = $("#wikibrowser-header .header-element");
-	$.each(elements, function(index, element) {
+	var $elements = $("#wikibrowser-header .header-element");
+	$.each($elements, function(index, element) {
 		setUpMouseEvents($(element));
 	});
 }
 
-function setUpMouseEvents(jElement) {
-	jElement.hover(headerElementMouseEnter, headerElementMouseLeave);
-	jElement.click(headerElementClick);
+function setUpMouseEvents($element) {
+	$element.hover(headerElementMouseEnter, headerElementMouseLeave);
+	$element.click(headerElementClick);
 }
 
 function createHeaderElementForArticle(articleName, pageID) {
@@ -56,22 +56,22 @@ function createHeaderElementForArticle(articleName, pageID) {
 	$element.html(acronym);
 	$element.data("associated-page", pageID);
 	setUpMouseEvents($element);
-	articleIconsHost.append($element);
+	$articleIconsHost.append($element);
 }
 
 function headerElementMouseEnter() {
 	hoveredElements++;
 
-	var jElement = $(this);
-	var newTooltipContent = jElement.attr('alt');
+	var $element = $(this);
+	var newTooltipContent = $element.attr('alt');
 
 	// Before taking measurements, update tooltip's contents
-	movingTooltipTempContent.html(newTooltipContent);
+	$movingTooltipTempContent.html(newTooltipContent);
 
-	var elementPosition = jElement.offset().left;
-	var elementWidth = jElement.outerWidth(false);
-	var tooltipWidth = movingTooltipTempContent.outerWidth(true);
-	var screenWidth = header.width();
+	var elementPosition = $element.offset().left;
+	var elementWidth = $element.outerWidth(false);
+	var tooltipWidth = $movingTooltipTempContent.outerWidth(true);
+	var screenWidth = $header.width();
 	
 	var targetPosition = elementPosition + elementWidth * 0.5 - 6;
 	var tooltipOffset = targetPosition - tooltipWidth * 0.5 - 10;
@@ -86,7 +86,7 @@ function headerElementMouseEnter() {
 		tooltipOffset = 30;
 	}
 
-	movingTooltip.stop().animate(
+	$movingTooltip.stop().animate(
 		{
 			opacity: 1
 		},
@@ -95,7 +95,7 @@ function headerElementMouseEnter() {
 			queue: false
 		}
 	);
-	movingTooltipPointer.stop().animate(
+	$movingTooltipPointer.stop().animate(
 		{
 			opacity: 1
 		},
@@ -104,7 +104,7 @@ function headerElementMouseEnter() {
 			queue: false
 		}
 	);
-	movingTooltip.animate(
+	$movingTooltip.animate(
 		{
 			width: tooltipWidth,
 			left: tooltipOffset
@@ -114,7 +114,7 @@ function headerElementMouseEnter() {
 			queue: false
 		}
 	);
-	movingTooltipPointer.animate(
+	$movingTooltipPointer.animate(
 	{
 			left: targetPosition,
 		},
@@ -123,7 +123,7 @@ function headerElementMouseEnter() {
 			queue: false
 		}
 	);	
-	movingTooltipFinalContent.animate(
+	$movingTooltipFinalContent.animate(
 		{ 
 			opacity: '0'
 		},
@@ -131,7 +131,7 @@ function headerElementMouseEnter() {
 			duration: 200,
 			queue: false,
 		 	always: function() {
-		 		movingTooltipFinalContent.animate(
+		 		$movingTooltipFinalContent.animate(
 		 			{
 		 				opacity: '1'
 		 			},
@@ -140,7 +140,7 @@ function headerElementMouseEnter() {
 		 				queue: false
 		 			}
 		 		);
-		 		movingTooltipFinalContent.html(newTooltipContent);
+		 		$movingTooltipFinalContent.html(newTooltipContent);
 		 	}
 		}
 	);
@@ -149,7 +149,7 @@ function headerElementMouseEnter() {
 function headerElementMouseLeave() {
 	hoveredElements--;
 	if (hoveredElements == 0) {
-		movingTooltip.stop().animate(
+		$movingTooltip.stop().animate(
 			{
 				opacity: 0
 			},
@@ -158,7 +158,7 @@ function headerElementMouseLeave() {
  				queue: false
 			}
 		);
-		movingTooltipPointer.stop().animate(
+		$movingTooltipPointer.stop().animate(
 			{
 				opacity: 0
 			},
@@ -167,7 +167,7 @@ function headerElementMouseLeave() {
  				queue: false
 			}
 		);
- 		movingTooltipFinalContent.stop().animate(
+ 		$movingTooltipFinalContent.stop().animate(
  			{
  				opacity: '0'
  			},
@@ -180,8 +180,8 @@ function headerElementMouseLeave() {
 }
 
 function headerElementClick() {
-	var jElement = $(this);
-	var pageId = jElement.data("associated-page");
+	var $element = $(this);
+	var pageId = $element.data("associated-page");
 	if (typeof pageId !== 'undefined')
 	{
 		scrollToPageId(pageId);
@@ -190,10 +190,10 @@ function headerElementClick() {
 
 function scrollToPageId(pageId) {
 	var newPageOffset = $("#" + pageId).offset().left;
-	var offsetDelta = wikiBrowserHost.scrollLeft();
+	var offsetDelta = $wikiBrowserHost.scrollLeft();
 	// Subtract 600 to also show page to the left, if the view area is large enough
-	if (wikiBrowserHost.width() > 1200) {
+	if ($wikiBrowserHost.width() > 1200) {
 		offsetDelta -= 600;
 	}
-	wikiBrowserHost.animate({scrollLeft: offsetDelta + newPageOffset}, 400);
+	$wikiBrowserHost.animate({scrollLeft: offsetDelta + newPageOffset}, 400);
 }
