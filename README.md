@@ -3,7 +3,7 @@ WikiDive
 
 **[Launch](http://amadeusw.github.io/WikiDive/)**
 
-Click through Wikipedia articles. Indulge in *wikidiving* and satisfy your couriosity.
+Click through Wikipedia articles. Indulge in [wikidiving](http://www.urbandictionary.com/define.php?term=Wikidiving) and satisfy your couriosity.
 
 Each Wikipedia article opened in WikiDive opens linked articles in the same page, right next to each other.
 
