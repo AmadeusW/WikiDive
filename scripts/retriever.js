@@ -39,15 +39,18 @@ function setUpSearch() {
 	searchBox.keyup(function(event) {
 		if (event.keyCode == 13) {
 			goToArticle(searchBox[0].value);
+			$("#wikibrowser-intro").hide(200);
 		}
 	});
 	var goButton = $(".wikibrowser-go-button");
 	goButton.on('click', function() {
 		goToArticle(searchBox[0].value);
+		$("#wikibrowser-intro").hide(200);
 	});	
 	var searchButton = $(".wikibrowser-search-button");
 	searchButton.on('click', function() {
 		searchArticle(searchBox[0].value);
+		$("#wikibrowser-intro").hide(200);
 	});
 	$( "#searchPage" ).perfectScrollbar({
 		wheelSpeed: 3
@@ -56,7 +59,7 @@ function setUpSearch() {
 	var surpriseButton = $(".wikibrowser-surprise-button");
 	surpriseButton.on('click', function() {
 		goToArticle("Frieze");
-		$("#wikibrowser-intro").delay(2000).hide(200);
+		$("#wikibrowser-intro").delay(1000).hide(200);
 	});
 	// This is desired to happen only once
 	$("#wikibrowser-intro").delay(700).show(300);
