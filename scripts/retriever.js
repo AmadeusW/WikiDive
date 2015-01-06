@@ -51,6 +51,14 @@ function setUpSearch() {
 	$( "#searchPage" ).perfectScrollbar({
 		wheelSpeed: 3
 	});	
+
+	var surpriseButton = $(".wikibrowser-surprise-button");
+	surpriseButton.on('click', function() {
+		goToArticle("Frieze");
+		$("#wikibrowser-intro").delay(2000).hide(200);
+	});
+	// This is desired to happen only once
+	$("#wikibrowser-intro").delay(700).show(300);
 }
 
 function loadPageIntoElement(page, element) {

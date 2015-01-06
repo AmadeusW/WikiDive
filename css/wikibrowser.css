@@ -273,22 +273,33 @@
 	padding: 6px 14px;
 }
 
-.wikibrowser-go-button {
+.wikibrowser-search-content .wikibrowser-go-button {
 	background-color: #a00;
 	cursor: pointer;
 }
 
-.wikibrowser-go-button:hover {
+.wikibrowser-search-content .wikibrowser-go-button:hover {
 	background-color: #c00;
 }
 
-.wikibrowser-search-button {
+.wikibrowser-search-content .wikibrowser-search-button {
 	background-color: #00a;
 	cursor: pointer;
 }
 
-.wikibrowser-search-button:hover {
+.wikibrowser-search-content .wikibrowser-search-button:hover {
 	background-color: #00d;
+}
+
+.wikibrowser-search-content .wikibrowser-surprise-button {
+	line-height: 110%; /* Make this button a bit smaller so it flows better with text */
+	padding: 6px;
+	background-color: #090;
+	cursor: pointer;
+}
+
+.wikibrowser-search-content .wikibrowser-surprise-button:hover {
+	background-color: #0b0;
 }
 
 .wikibrowser-search-results {
@@ -329,4 +340,16 @@
 	color: #a00;
 	font-weight: bold;
 	text-decoration: underline;
+}
+
+/* Intro */
+
+#wikibrowser-intro {
+	display: none;
+}
+
+.wikidive-inline {
+	font-family: Georgia, Times, 'Times New Roman', serif;
+	font-variant: small-caps;
+	font-size: 1.1em;
 }
