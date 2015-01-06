@@ -18,7 +18,7 @@ function createColumnAfter($previousPage, pageId) {
 '			</div>';
 
 	// Add page to the end of wikibrowser-host's children, or after specified element
-	if (typeof previousPage === 'undefined') {
+	if (typeof $previousPage === 'undefined') {
 		$("#wikibrowser-host").append(tempContainer.innerHtml);
 	}
 	else {
