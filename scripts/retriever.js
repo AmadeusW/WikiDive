@@ -10,6 +10,7 @@ function createColumnAfter($previousPage, pageId) {
 	tempContainer.innerHtml = 
 '			<div class="wikibrowser-page-host wikibrowser-page-shadow" id="' + pageId + '">' +
 '				<div class="wikibrowser-page-header">' +
+'					<div class="wikibrowser-page-header-buttons"><a class="button-wiki" title="View on Wikipedia">W</a><a class="button-close" title="Close this article">☓</a></div>' +
 '					<h2></h2>' +
 '				</div>'+
 '				<div class="wikibrowser-page ps-container ps-active-y">'+
@@ -18,7 +19,7 @@ function createColumnAfter($previousPage, pageId) {
 '			</div>';
 
 	// Add page to the end of wikibrowser-host's children, or after specified element
-	if (typeof previousPage === 'undefined') {
+	if (typeof $previousPage === 'undefined') {
 		$("#wikibrowser-host").append(tempContainer.innerHtml);
 	}
 	else {
@@ -83,7 +84,15 @@ function loadPageIntoElement(page, element) {
 			$( "#" + element + " .wikibrowser-page").perfectScrollbar({
 				wheelSpeed: 3
 			});
+			$("#" + element + " > .wikibrowser-page-header .button-wiki").show().attr({
+				target: '_blank',
+				href: 'http://en.wikipedia.org/wiki/' + page
+			});
 		}
+		$("#" + element + " > .wikibrowser-page-header .button-close").show().on('click', function() {
+			$( "#" + element ).remove();
+			$( "#nav_" + element ).remove();
+		});
 	});  
 }
 
@@ -183,10 +192,22 @@ function loadArticleHandler(articleName) {
  * @param {string} loadLocation - ID of element after which the article will be rendered.
  */
 function loadArticle(articleName, $previousElement) {
+	// Fix up the articleName
+	// Remove &redirect=no
+	if (articleName.indexOf('&') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('&'));
+	}
+	// Remove #anchor
+	if (articleName.indexOf('#') > -1) {
+		articleName = articleName.substring(0, articleName.indexOf('#'));
+	}
+	// ' ' -> '_' for uniform naming (articles from search results have spaces, others have underscores)
+	articleName = articleName.replace(/ /g, "_");		
+
 	if (!isArticleLoaded(articleName)) {
 		var pageId = "page" + pageIndex++;
 		articleTable[articleName] = pageId;
-		createHeaderElementForArticle(articleName, pageId);
+		createHeaderElementForArticle(articleName, pageId, $previousElement);
 		loadPageIntoElement(articleName, createColumnAfter($previousElement, pageId));
 	}
 }

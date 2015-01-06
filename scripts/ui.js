@@ -30,15 +30,8 @@ function setUpMouseEvents($element) {
 	$element.click(headerElementClick);
 }
 
-function createHeaderElementForArticle(articleName, pageID) {
-	// Remove &redirect=no
-	if (articleName.indexOf('&') > -1) {
-		articleName = articleName.substring(0, articleName.indexOf('&'));
-	}
-	// Remove #anchor
-	if (articleName.indexOf('#') > -1) {
-		articleName = articleName.substring(0, articleName.indexOf('#'));
-	}	
+function createHeaderElementForArticle(articleName, pageID, $previousPage) {
+
 	// '_' -> ' ' for nice tooltip and simpler regex
 	articleName = articleName.replace(/_/g, " ");	
 
@@ -51,12 +44,23 @@ function createHeaderElementForArticle(articleName, pageID) {
 	var $element = $("<a>", {
 		target: "_blank",
 		class: "header-element",
+		id: "nav_" + pageID,
 		alt: articleName
 	})
 	$element.html(acronym);
 	$element.data("associated-page", pageID);
 	setUpMouseEvents($element);
-	$articleIconsHost.append($element);
+
+	// Place the header element either at the end of the list,
+	// or after the specified element (if it's valid)
+	if (typeof $previousPage === 'undefined' || $previousPage.attr('id') === 'searchPageHost') {
+		$articleIconsHost.append($element);
+	}
+	else {
+		var previousPageID = $previousPage.attr('id');
+		$previousButton = $('#nav_' + previousPageID);
+		$previousButton.after($element);
+	}	
 }
 
 function headerElementMouseEnter() {
