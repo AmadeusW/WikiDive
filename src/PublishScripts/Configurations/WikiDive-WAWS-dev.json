@@ -1,0 +1,21 @@
+{
+    "environmentSettings": {
+        "webSite": {
+            "name": "WikiDive",
+            "location": "South Central US"
+        },
+        "databases": [
+            {
+                "connectionStringName": "DefaultConnection",
+                "databaseName": "WikiDive_db",
+                "serverName": "",
+                "user": "wikidive",
+                "password": "",
+                "edition": "",
+                "size": "",
+                "collation": "",
+                "location": "South Central US"
+            }
+        ]
+    }
+}
