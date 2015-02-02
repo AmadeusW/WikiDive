@@ -26,6 +26,7 @@
 	height: 100%;
 	white-space: normal;
 	border-left: 1px solid #CCC;
+	overflow-x: hidden;
 	/*padding-right: 30px;	no shadow! */
 	/* as flex child: */
 	-webkit-flex-shrink: 0;
