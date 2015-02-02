@@ -6,6 +6,7 @@ var $header;
 var $articleIconsHost;
 var $wikiBrowserHost;
 var hoveredElements = 0;
+var pageWidth = 700;
 
 $( document ).ready(function() {
 	$movingTooltip = $('#moving-tooltip');
@@ -198,7 +199,7 @@ function scrollToPageId(pageId) {
 	var targetPageOffset = $("#" + pageId).offset().left;
 	var offsetDelta = $wikiBrowserHost.scrollLeft();
 	// Center the target page
-	var freeSpace = $wikiBrowserHost.width() - 600;
+	var freeSpace = $wikiBrowserHost.width() - pageWidth;
 	if (freeSpace > 0) {
 
 		offsetDelta -= freeSpace * 0.5;

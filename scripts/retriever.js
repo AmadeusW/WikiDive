@@ -85,6 +85,9 @@ function loadPageIntoElement(page, element) {
 			$( "#" + element + " .wikibrowser-page > .content" ).append( data.parse.text['*'] );
 			$( "#" + element + " .wikibrowser-page > .content a").each(fixHyperlink);
 			$( "#" + element + " .wikibrowser-page").perfectScrollbar({
+				wheelPropagation: true,
+				minScrollbarLength: 30,
+				suppressScrollX: true,
 				wheelSpeed: 3
 			});
 			$("#" + element + " > .wikibrowser-page-header .button-wiki").show().attr({

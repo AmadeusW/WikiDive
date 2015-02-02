@@ -9,44 +9,20 @@
 	right: 0;
 	bottom: 0;
 	white-space: nowrap;
-	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-	display: -ms-flexbox;      /* TWEENER - IE 10 */
-	display: -webkit-flex;     /* NEW - Chrome */
-	display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-	-webkit-flex-direction: row;
-	-moz-flex-direction: row;
-	-ms-flex-direction: row;
-	flex-direction: row;
 }
 
 .wikibrowser-page-host {
 	position: relative;
-	width: 600px;
+	width: 700px;
 	height: 100%;
 	white-space: normal;
-	padding-right: 30px;	
-	/* as flex child: */
-	-webkit-flex-shrink: 0;
-	-moz-flex-shrink: 0;
-	-ms-flex-shrink: 0;
-	flex-shrink: 0;
-	-webkit-flex-grow: 0;
-	-moz-flex-grow: 0;
-	-ms-flex-grow: 0;
-	flex-grow: 0;
-	/* as flex parent: */
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
-	-moz-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
-}
+	border-left: 1px solid #CCC;
+	overflow: hidden;
+	/*padding-right: 30px;	no shadow! */
 
+	display: inline-block;
+}
+/*
 .wikibrowser-page-host:after {
 	position: absolute;
 	display: block;
@@ -56,20 +32,25 @@
 	bottom: 0;
 	width: 20px;
 	border-left: 1px solid #CCC;
-	background: -moz-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(238, 238, 238, 1.0)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
-	background: linear-gradient(to right,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a63f2828', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
-}
+	background: -moz-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%, rgba(0,0,0,0) 100%); 
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(238, 238, 238, 1.0)), color-stop(100%,rgba(0,0,0,0))); 
+	background: -webkit-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	background: -o-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	background: -ms-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	background: linear-gradient(to right,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a63f2828', endColorstr='#00000000',GradientType=1 ); 
+} no shadow! */
 
 .wikibrowser-page-header {
 	border-bottom: 1px solid #E2E3E4;
 	margin: 0 3.35em;
 	padding-top: 1em;
-	position: relative;
+	position: absolute;
+	z-index:2;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
 }
 
 .wikibrowser-page-header h2 {
@@ -106,10 +87,9 @@
 }
 
 .wikibrowser-page {
-	-webkit-flex: 1;
-	-moz-flex: 1;
-	-ms-flex: 1;
-	flex: 1; /* this fills up the remaining space */
+	height: 100%;
+	margin-top: 50px;
+	padding-bottom: 50px;
 	/* Requirements for perfect-scrollbar: */
 	overflow: hidden;
 	position: relative;
