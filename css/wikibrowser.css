@@ -25,7 +25,8 @@
 	width: 600px;
 	height: 100%;
 	white-space: normal;
-	padding-right: 30px;	
+	border-left: 1px solid #CCC;
+	/*padding-right: 30px;	no shadow! */
 	/* as flex child: */
 	-webkit-flex-shrink: 0;
 	-moz-flex-shrink: 0;
@@ -46,7 +47,7 @@
 	-ms-flex-direction: column;
 	flex-direction: column;
 }
-
+/*
 .wikibrowser-page-host:after {
 	position: absolute;
 	display: block;
@@ -56,14 +57,14 @@
 	bottom: 0;
 	width: 20px;
 	border-left: 1px solid #CCC;
-	background: -moz-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(238, 238, 238, 1.0)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
-	background: linear-gradient(to right,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a63f2828', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
-}
+	background: -moz-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%, rgba(0,0,0,0) 100%); 
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(238, 238, 238, 1.0)), color-stop(100%,rgba(0,0,0,0))); 
+	background: -webkit-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	background: -o-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	background: -ms-linear-gradient(left,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	background: linear-gradient(to right,  rgba(238, 238, 238, 1.0) 0%,rgba(0,0,0,0) 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a63f2828', endColorstr='#00000000',GradientType=1 ); 
+} no shadow! */
 
 .wikibrowser-page-header {
 	border-bottom: 1px solid #E2E3E4;
