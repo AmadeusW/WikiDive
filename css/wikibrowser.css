@@ -45,7 +45,12 @@
 	border-bottom: 1px solid #E2E3E4;
 	margin: 0 3.35em;
 	padding-top: 1em;
-	position: relative;
+	position: absolute;
+	z-index:2;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
 }
 
 .wikibrowser-page-header h2 {
@@ -83,6 +88,8 @@
 
 .wikibrowser-page {
 	height: 100%;
+	margin-top: 50px;
+	padding-bottom: 50px;
 	/* Requirements for perfect-scrollbar: */
 	overflow: hidden;
 	position: relative;
