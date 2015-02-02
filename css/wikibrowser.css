@@ -9,15 +9,6 @@
 	right: 0;
 	bottom: 0;
 	white-space: nowrap;
-	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-	display: -ms-flexbox;      /* TWEENER - IE 10 */
-	display: -webkit-flex;     /* NEW - Chrome */
-	display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-	-webkit-flex-direction: row;
-	-moz-flex-direction: row;
-	-ms-flex-direction: row;
-	flex-direction: row;
 }
 
 .wikibrowser-page-host {
@@ -26,27 +17,10 @@
 	height: 100%;
 	white-space: normal;
 	border-left: 1px solid #CCC;
-	overflow-x: hidden;
+	overflow: hidden;
 	/*padding-right: 30px;	no shadow! */
-	/* as flex child: */
-	-webkit-flex-shrink: 0;
-	-moz-flex-shrink: 0;
-	-ms-flex-shrink: 0;
-	flex-shrink: 0;
-	-webkit-flex-grow: 0;
-	-moz-flex-grow: 0;
-	-ms-flex-grow: 0;
-	flex-grow: 0;
-	/* as flex parent: */
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
-	-moz-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
+
+	display: inline-block;
 }
 /*
 .wikibrowser-page-host:after {
@@ -108,10 +82,7 @@
 }
 
 .wikibrowser-page {
-	-webkit-flex: 1;
-	-moz-flex: 1;
-	-ms-flex: 1;
-	flex: 1; /* this fills up the remaining space */
+	height: 100%;
 	/* Requirements for perfect-scrollbar: */
 	overflow: hidden;
 	position: relative;
